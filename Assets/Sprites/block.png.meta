@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3796bd94eed207a4bb3d6e07f0d6636a
-timeCreated: 1456485504
+timeCreated: 1456734120
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -61,7 +61,7 @@ TextureImporter:
         width: 30
         height: 30
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: block_1
       rect:
@@ -71,7 +71,7 @@ TextureImporter:
         width: 30
         height: 30
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: block_2
       rect:
@@ -81,7 +81,7 @@ TextureImporter:
         width: 30
         height: 30
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

@@ -8,9 +8,10 @@ public class Player : MonoBehaviour {
 	public LayerMask groundLayer;
 
 	public GameObject mainCamera;
+	public GameObject bullet;
+
 	private Rigidbody2D rigidbody2D;
 	private Animator anim;
-
 	private bool isGrounded;
 
 	void Start () {
@@ -37,7 +38,12 @@ public class Player : MonoBehaviour {
 		bool isFalling = velY < -0.1f ? true : false;
 		anim.SetBool ("isJumping", isJumping);
 		anim.SetBool ("isFalling", isFalling);
-			}
+
+		if (Input.GetKeyDown ("z")) {
+			anim.SetTrigger ("Shot");
+			Instantiate(bullet, transform.position + new Vector3(0f, 1.2f, 0f),transform.rotation);
+		}
+	}
 
 	void FixedUpdate () {
 		float x = Input.GetAxisRaw("Horizontal");

@@ -13,10 +13,12 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rigidbody2D;
 	private Animator anim;
 	private bool isGrounded;
+	private Renderer renderer;
 
 	void Start () {
 		anim = GetComponent<Animator> ();
 		rigidbody2D = GetComponent<Rigidbody2D>();
+		renderer = GetComponent<Renderer>();
 	}
 
 	void Update(){
@@ -70,4 +72,25 @@ public class Player : MonoBehaviour {
 			anim.SetBool ("Dash", false);
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D col){
+		if (col.gameObject.tag == "Enemy") {
+			StartCoroutine("Damage");
+		}
+	}
+
+	IEnumerator Damage(){
+		gameObject.layer = LayerMask.NameToLayer ("PlayerDamage");
+		int count = 10;
+		while(count > 0){
+			renderer.material.color = new Color(1,1,1,0);
+			yield return new WaitForSeconds(0.05f);
+			renderer.material.color = new Color (1,1,1,1);
+			yield return new WaitForSeconds(0.05f);
+			count--;
+		}
+		gameObject.layer = LayerMask.NameToLayer ("Player");
+	}
 }
+
+

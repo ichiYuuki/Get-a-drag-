@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour {
 		Destroy (gameObject, 5);
 	}
 
-	void OnTrigger2D(Collider col){
+	void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == "Enemy") {
 			Destroy(gameObject);
 		}

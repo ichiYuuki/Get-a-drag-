@@ -6,26 +6,45 @@ public class Enemy1 : MonoBehaviour {
 	Rigidbody2D rigidbody2D;
 	public int speed = -3;
 	public GameObject explosion;
+	public GameObject item;
 	public int attackPoint = 10;
-	public Life life;
+	private Life life;
+	private const string MAIN_CAMERA_NAME = "MainCamera";
+	private bool _isRendered = false;
+
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
+		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
 
 	void Update () {
-		rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
+		if(_isRendered){
+			rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D col){
-		if(col.tag == "Bullet"){
-			Destroy(gameObject);
-			Instantiate(explosion, transform.position, transform.rotation);
+		if(_isRendered){
+			if(col.tag == "Bullet"){
+				Destroy(gameObject);
+				Instantiate(explosion, transform.position, transform.rotation);
+
+				if(Random.Range(0,4) == 0){
+					Instantiate(item, transform.position, transform.rotation);
+				}
+			}
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D col){
 		if (col.gameObject.tag == "Buyer") {
 			life.LifeDown(attackPoint);
+		}
+	}
+
+	void OnWillRenderObject(){
+		if (Camera.current.tag == MAIN_CAMERA_NAME) {
+			_isRendered = true;
 		}
 	}
 

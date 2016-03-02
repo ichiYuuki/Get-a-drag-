@@ -8,9 +8,10 @@ public class Player : MonoBehaviour {
 	public float jumpPower = 700;
 	public LayerMask groundLayer;
 
+	public GameObject explosion;
 	public GameObject mainCamera;
 	public GameObject bullet;
-	public Life life;
+//	public Life life;
 
 	private Rigidbody2D rigidbody2D;
 	private Animator anim;
@@ -18,6 +19,10 @@ public class Player : MonoBehaviour {
 	private Renderer renderer;
 	private bool gameClear = false;
 	public Text clearText;
+
+	public Text gameOverText;
+	private bool gameOver = false;
+
 
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -53,10 +58,17 @@ public class Player : MonoBehaviour {
 				}
 
 				if (gameObject.transform.position.y < Camera.main.transform.position.y - 8) {
-					life.GameOver ();
+					GameOver ();
 				}
 			}
+
 		}
+//		if (gameOver) {
+//			gameOverText.enabled = true;
+//			if(Input.GetMouseButtonDown(0)){
+//				Application.LoadLevel("Title");
+//			}
+//		}
 	}
 
 	void FixedUpdate () {
@@ -94,22 +106,32 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 		if (col.gameObject.tag == "Enemy") {
-			StartCoroutine("Damage");
+//			StartCoroutine("Damage");
+			if(gameOver == false){
+				Instantiate(explosion, transform.position + new Vector3(0, 1, 0), transform.rotation);
+			}
+			GameOver();
 		}
+//		if(gameOver){
+//			gameOverText.enabled = true;
+//			if(Input.GetMouseButtonDown(0)){
+//				Application.LoadLevel("Title");
+//			}
+//		}
 	}
 
-	IEnumerator Damage(){
-		gameObject.layer = LayerMask.NameToLayer ("PlayerDamage");
-		int count = 10;
-		while(count > 0){
-			renderer.material.color = new Color(1,1,1,0);
-			yield return new WaitForSeconds(0.05f);
-			renderer.material.color = new Color (1,1,1,1);
-			yield return new WaitForSeconds(0.05f);
-			count--;
-		}
-		gameObject.layer = LayerMask.NameToLayer ("Player");
-	}
+//	IEnumerator Damage(){
+//		gameObject.layer = LayerMask.NameToLayer ("PlayerDamage");
+//		int count = 10;
+//		while(count > 0){
+//			renderer.material.color = new Color(1,1,1,0);
+//			yield return new WaitForSeconds(0.05f);
+//			renderer.material.color = new Color (1,1,1,1);
+//			yield return new WaitForSeconds(0.05f);
+//			count--;
+//		}
+//		gameObject.layer = LayerMask.NameToLayer ("Player");
+//	}
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag == "ClearZone") {
@@ -119,6 +141,15 @@ public class Player : MonoBehaviour {
 
 	void CallTitle(){
 		Application.LoadLevel ("Title");
+	}
+
+	void GameOver(){
+		gameOver = true;
+		Destroy (gameObject);
+		gameOverText.enabled = true;
+		if(Input.GetMouseButtonDown(0)){
+			Application.LoadLevel("Title");
+		}
 	}
 }
 

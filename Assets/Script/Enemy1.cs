@@ -14,7 +14,7 @@ public class Enemy1 : MonoBehaviour {
 
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
-		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
+//		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
 
 	void Update () {
@@ -41,11 +41,11 @@ public class Enemy1 : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col){
-		if (col.gameObject.tag == "Buyer") {
-			life.LifeDown(attackPoint);
-		}
-	}
+//	void OnCollisionEnter2D(Collision2D col){
+//		if (col.gameObject.tag == "Buyer") {
+//			life.LifeDown(attackPoint);
+//		}
+//	}
 
 	void OnWillRenderObject(){
 		if (Camera.current.tag == MAIN_CAMERA_NAME) {

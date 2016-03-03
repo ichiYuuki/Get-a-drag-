@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Life : MonoBehaviour {
 	
 	RectTransform rt;
+
 	public GameObject UnityChan;
 	public GameObject explosion;
 	public Text gameOverText;
@@ -15,12 +16,14 @@ public class Life : MonoBehaviour {
 	}
 		
 	void Update(){
-		if (rt.sizeDelta.y <= 0) {
-		if(gameOver == false){
-			Instantiate(explosion,UnityChan.transform.position + new Vector3(0,1,0),UnityChan.transform.rotation);
-		}
-		GameOver();
-		}
+//		if (rt.sizeDelta.y <= 0) {
+//			if(gameOver == false){
+//				Instantiate(explosion,UnityChan.transform.position + new Vector3(0,1,0),UnityChan.transform.rotation);
+//			}
+//		GameOver();
+//		}
+
+
 		if (gameOver) {
 			gameOverText.enabled = true;
 			if(Input.GetMouseButtonDown(0)){

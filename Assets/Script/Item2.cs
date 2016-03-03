@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Item2 : MonoBehaviour {
 
-	public float healtime = 20;
+	public float healtime = 5;
 	private Energy energy;
 
 	void Start () {

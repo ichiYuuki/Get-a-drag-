@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Energy : MonoBehaviour {
-	private float time = 60;
+	private float time = 15;
 
 	void Start () {
 		GetComponent<Text> ().text = ((int)time).ToString();
@@ -17,13 +17,11 @@ public class Energy : MonoBehaviour {
 
 	public void EnergyUp(float ht){
 		time += (ht);
-		if (time > 61)time = 61;
+		if (time > 60)time = 60;
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}
 
 //	void EnergyDown(){
 //		rt.sizeDelta -= new Vector2 (0, time);
 //	}
-
-
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Energy : MonoBehaviour {
-	public float time = 15;
+	private float time = 15;
 
 	void Start () {
 		GetComponent<Text> ().text = ((int)time).ToString();

@@ -35,16 +35,14 @@ public class Player : MonoBehaviour {
 		renderer = GetComponent<Renderer>();
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
-		Text time = GameObject.Find ("Time").GetComponent<Text> ();
+//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 //		GetComponent<Text> ().text = ((int)time).ToString();
 	}
 
 	void Update(){
 		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-		while(true){
-		
 		Debug.Log(time.text);
-		}
+
 		isGrounded = Physics2D.Linecast (
 			transform.position + transform.up * 1,
 			transform.position - transform.up * 0.07f,
@@ -53,15 +51,17 @@ public class Player : MonoBehaviour {
 		if (!gameClear) {
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
-					anim.SetBool ("Dash", false);
-					anim.SetTrigger ("Jump");
-					isGrounded = false;
-					rigidbody2D.AddForce (Vector2.up * jumpPower);
 //					if(time < 1){
+						anim.SetBool ("Dash", false);
+						anim.SetTrigger ("Jump");
+						isGrounded = false;
+						rigidbody2D.AddForce (Vector2.up * jumpPower/2);
+						
+//					}else{
 //						anim.SetBool ("Dash", false);
 //						anim.SetTrigger ("Jump");
 //						isGrounded = false;
-//						rigidbody2D.AddForce (Vector2.up * jumpPower/2);
+//						rigidbody2D.AddForce (Vector2.up * jumpPower);
 //					}
 				}
 			}

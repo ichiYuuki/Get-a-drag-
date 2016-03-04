@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
 	public Text gameOverText;
 	private bool gameOver = false;
 	public Canvas canvas;
+//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
+
 
 	void Start () {
 
@@ -33,10 +35,16 @@ public class Player : MonoBehaviour {
 		renderer = GetComponent<Renderer>();
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
-
+		Text time = GameObject.Find ("Time").GetComponent<Text> ();
+//		GetComponent<Text> ().text = ((int)time).ToString();
 	}
 
 	void Update(){
+		Text time = GameObject.Find ("Time").GetComponent<Text> ();
+		while(true){
+		
+		Debug.Log(time.text);
+		}
 		isGrounded = Physics2D.Linecast (
 			transform.position + transform.up * 1,
 			transform.position - transform.up * 0.07f,
@@ -49,7 +57,12 @@ public class Player : MonoBehaviour {
 					anim.SetTrigger ("Jump");
 					isGrounded = false;
 					rigidbody2D.AddForce (Vector2.up * jumpPower);
-
+//					if(time < 1){
+//						anim.SetBool ("Dash", false);
+//						anim.SetTrigger ("Jump");
+//						isGrounded = false;
+//						rigidbody2D.AddForce (Vector2.up * jumpPower/2);
+//					}
 				}
 			}
 			float velY = rigidbody2D.velocity.y;
@@ -64,18 +77,14 @@ public class Player : MonoBehaviour {
 					Instantiate (bullet, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
 				}
 
-				if (gameObject.transform.position.y < Camera.main.transform.position.y - 8) {
-					GameOver ();
-				}
+//				if (gameObject.transform.position.y < Camera.main.transform.position.y - 8) {
+//					GameOver ();
+//				}
 			}
-
 		}
-//		if (gameOver) {
-//			gameOverText.enabled = true;
-//			if(Input.GetMouseButtonDown(0)){
-//				Application.LoadLevel("Title");
-//			}
-//		}
+
+
+
 
 	}
 
@@ -89,16 +98,18 @@ public class Player : MonoBehaviour {
 				transform.localScale = temp;
 				anim.SetBool ("Dash", true);
 
-				if (transform.position.x > mainCamera.transform.position.x - 4) {
-					Vector3 cameraPos = mainCamera.transform.position;
-					cameraPos.x = transform.position.x + 4;
-					mainCamera.transform.position = cameraPos;
-				}
-				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
-				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
-				Vector2 pos = transform.position;
-				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
-				transform.position = pos;
+//				if (transform.position.x > mainCamera.transform.position.x - 4) {
+//					Vector3 cameraPos = mainCamera.transform.position;
+//					cameraPos.x = transform.position.x + 4;
+//					mainCamera.transform.position = cameraPos;
+//				}
+//
+//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+//				Vector2 pos = transform.position;
+//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
+//
+//				transform.position = pos;
 
 			} else {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
@@ -120,6 +131,9 @@ public class Player : MonoBehaviour {
 			}
 			GameOver();
 		}
+		if (col.gameObject.tag == "DestroyArea") {
+			GameOver();
+		}
 	}
 
 
@@ -127,6 +141,7 @@ public class Player : MonoBehaviour {
 		if (col.tag == "ClearZone") {
 			gameClear = true;
 		}
+
 	}
 
 	public void GameOver(){

@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
 						anim.SetBool ("Dash", false);
 						anim.SetTrigger ("Jump");
 						isGrounded = false;
-						rigidbody2D.AddForce (Vector2.up * jumpPower/2);
+						rigidbody2D.AddForce (Vector2.up * jumpPower*2/3);
 					
 					}else{
 						anim.SetBool ("Dash", false);

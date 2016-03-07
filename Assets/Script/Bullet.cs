@@ -17,11 +17,11 @@ public class Bullet : MonoBehaviour {
 		if (sum == 0) {
 			player = GameObject.FindWithTag ("Buyer");
 			Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D> ();
-			rigidbody2D.velocity = new Vector2 (speed * player.transform.localScale.x, rigidbody2D.velocity.y);
+			rigidbody2D.velocity = new Vector2 (speed / 2 * player.transform.localScale.x, rigidbody2D.velocity.y);
 			Vector2 temp = transform.localScale;
 			temp.x = player.transform.localScale.x;
 			transform.localScale = temp;
-			Destroy (gameObject, 1/2);
+			Destroy (gameObject, 1);
 		} else {
 			player = GameObject.FindWithTag ("Buyer");
 			Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D> ();

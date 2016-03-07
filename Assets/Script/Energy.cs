@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Energy : MonoBehaviour {
 	private float time = 15;
-
+//	public GameObject player;
 	void Start () {
 		GetComponent<Text> ().text = ((int)time).ToString();
 	}
@@ -14,6 +14,11 @@ public class Energy : MonoBehaviour {
 		if (time < 0)time = 0;
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}
+
+	public void Zero(float time){
+		time = 0;
+		GetComponent<Text> ().text = ((int)time).ToString ();
+	} 
 
 	public void EnergyUp(float ht){
 		time += (ht);

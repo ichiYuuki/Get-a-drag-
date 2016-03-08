@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MainCamera : MonoBehaviour {
 	public GameObject player;
+
 	private Transform playerTrans;
 	// Use this for initialization
 	void Start () {
@@ -11,12 +12,13 @@ public class MainCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		transform.position = new Vector3 (player.transform.position.x, 5,-10);
 		if (transform.position.x < -2) {
 			transform.position = new Vector3(-2, 5, -10);
 		}
-		if (transform.position.x >= 45) {
-			transform.position = new Vector3(45, 5, -10);
+		if (transform.position.x >= 100) {
+			transform.position = new Vector3(100, 5, -10);
 		}
 		float playerHeight = playerTrans.position.y;
 		float currentCameraHeight = transform.position.y;

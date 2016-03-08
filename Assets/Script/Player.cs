@@ -130,16 +130,17 @@ public class Player : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col){
-		
-		if (col.gameObject.tag == "Enemy") {
-			Destroy(col.gameObject);
-			if(gameOver == false){
-				Instantiate(explosion,transform.position + new Vector3(0,1,0),transform.rotation);
+		if (!gameClear) {
+			if (col.gameObject.tag == "Enemy") {
+				Destroy (col.gameObject);
+				if (gameOver == false) {
+					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
+				}
+				GameOver ();
 			}
-			GameOver();
-		}
-		if (col.gameObject.tag == "DestroyArea") {
-			GameOver();
+			if (col.gameObject.tag == "DestroyArea") {
+				GameOver ();
+			}
 		}
 	}
 	

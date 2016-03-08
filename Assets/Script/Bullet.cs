@@ -37,6 +37,9 @@ public class Bullet : MonoBehaviour {
 		if (col.gameObject.tag == "Enemy") {
 			Destroy(gameObject);
 		}
+		if (col.gameObject.tag == "BreakBlock") {
+			Destroy(gameObject);
+		}
 	}
 	
 }

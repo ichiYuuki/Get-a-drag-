@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ClearZone2 : MonoBehaviour {
+public class FakeClear : MonoBehaviour {
 
 	public Text clearText;
 	private bool gameClear;
@@ -10,7 +10,7 @@ public class ClearZone2 : MonoBehaviour {
 	void FixedUpdate () {
 		if (gameClear) {
 			clearText.enabled = true;
-			Invoke ("CallFinal", 4);
+			Invoke ("CallFake", 4);
 		}
 	}
 	
@@ -20,8 +20,8 @@ public class ClearZone2 : MonoBehaviour {
 		}
 	}
 	
-	void CallFinal(){
-		Application.LoadLevel ("Final");
+	void CallFake(){
+		Application.LoadLevel ("Fake");
 	}
 
 }

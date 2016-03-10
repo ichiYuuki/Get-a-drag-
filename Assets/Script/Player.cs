@@ -79,6 +79,7 @@ public class Player : MonoBehaviour {
 				if (Input.GetKeyDown ("z")) {
 					anim.SetTrigger ("Shot");
 					Instantiate (bullet, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
+					GetComponent<AudioSource>().Play();
 				}
 			}
 		}

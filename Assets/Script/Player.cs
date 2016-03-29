@@ -40,13 +40,6 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update(){
-		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-		string times = Convert.ToString(time.text);
-		float sum;
-		float.TryParse (times, out sum);
-//		Debug.Log(time.text);
-//		Debug.Log(times);
-//		Debug.Log(sum);
 		isGrounded = Physics2D.Linecast (
 			transform.position + transform.up * 1,
 			transform.position - transform.up * 0.07f,
@@ -55,18 +48,10 @@ public class Player : MonoBehaviour {
 		if (!gameClear) {
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
-					if(sum == 0){
-						anim.SetBool ("Dash", false);
-						anim.SetTrigger ("Jump");
-						isGrounded = false;
-						rigidbody2D.AddForce (Vector2.up * jumpPower*2/3);
-					
-					}else{
-						anim.SetBool ("Dash", false);
-						anim.SetTrigger ("Jump");
-						isGrounded = false;
-						rigidbody2D.AddForce (Vector2.up * jumpPower);
-					}
+					anim.SetBool ("Dash", false);
+					anim.SetTrigger ("Jump");
+					isGrounded = false;
+					rigidbody2D.AddForce (Vector2.up * jumpPower);
 				}
 			}
 			float velY = rigidbody2D.velocity.y;
@@ -86,26 +71,15 @@ public class Player : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-		string times = Convert.ToString(time.text);
-		float sum;
-		float.TryParse (times, out sum);
 		if (!gameClear) {
 			float x = Input.GetAxisRaw ("Horizontal");
 			if (x != 0) {
-				if(sum == 0){
-					rigidbody2D.velocity = new Vector2 (x * speed/2, rigidbody2D.velocity.y);
-					Vector2 temp = transform.localScale;
-					temp.x = x;
-					transform.localScale = temp;
-					anim.SetBool ("Dash", true);
-				}else{
-					rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
-					Vector2 temp = transform.localScale;
-					temp.x = x;
-					transform.localScale = temp;
-					anim.SetBool ("Dash", true);
-				}
+				rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
+				Vector2 temp = transform.localScale;
+				temp.x = x;
+				transform.localScale = temp;
+				anim.SetBool ("Dash", true);
+			}
 //				if (transform.position.x > mainCamera.transform.position.x - 4) {
 //					Vector3 cameraPos = mainCamera.transform.position;
 //					cameraPos.x = transform.position.x + 4;
@@ -118,8 +92,7 @@ public class Player : MonoBehaviour {
 //				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
 //
 //				transform.position = pos;
-				
-			} else {
+			else {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 				anim.SetBool ("Dash", false);
 			}

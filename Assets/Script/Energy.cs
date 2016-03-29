@@ -10,7 +10,7 @@ public class Energy : MonoBehaviour {
 	}
 
 	void Update () {
-		time -= Time.deltaTime;
+		//time -= Time.deltaTime;
 		if (time < 0)time = 0;
 		GetComponent<Text> ().text = ((int)time).ToString ();
 	}

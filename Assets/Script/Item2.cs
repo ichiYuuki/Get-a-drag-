@@ -7,7 +7,7 @@ public class Item2 : MonoBehaviour {
 	private Energy energy;
 
 	void Start () {
-		energy = GameObject.FindGameObjectWithTag ("Time").GetComponent<Energy> ();
+//		energy = GameObject.FindGameObjectWithTag ("Time").GetComponent<Energy> ();
 	}
 	
 //	void OnCollisionEnter2D(Collision2D col){

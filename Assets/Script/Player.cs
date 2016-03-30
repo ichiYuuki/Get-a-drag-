@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	public GameObject explosion;
 	public GameObject mainCamera;
 	public GameObject bullet;
-//	public Life life;
+	//	public Life life;
 	public Death death;
 	public Energy energy;
 	
@@ -22,12 +22,12 @@ public class Player : MonoBehaviour {
 	private bool isGrounded;
 	private Renderer renderer;
 	private bool gameClear = false;
-//	public Text clearText;
+	//	public Text clearText;
 	
 	public Text gameOverText;
 	private bool gameOver = false;
 	public Canvas canvas;
-//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
+	//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
 	void Start () {
 		
 		anim = GetComponent<Animator> ();
@@ -35,8 +35,8 @@ public class Player : MonoBehaviour {
 		renderer = GetComponent<Renderer>();
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
-//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-//		GetComponent<Text> ().text = ((int)time).ToString();
+		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
+		//		GetComponent<Text> ().text = ((int)time).ToString();
 	}
 	
 	void Update(){
@@ -44,14 +44,14 @@ public class Player : MonoBehaviour {
 		string times = Convert.ToString(time.text);
 		float sum;
 		float.TryParse (times, out sum);
-//		Debug.Log(time.text);
-//		Debug.Log(times);
-//		Debug.Log(sum);
+		//		Debug.Log(time.text);
+		//		Debug.Log(times);
+		//		Debug.Log(sum);
 		isGrounded = Physics2D.Linecast (
 			transform.position + transform.up * 1,
 			transform.position - transform.up * 0.07f,
 			groundLayer);
-
+		
 		if (!gameClear) {
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 						anim.SetTrigger ("Jump");
 						isGrounded = false;
 						rigidbody2D.AddForce (Vector2.up * jumpPower*2/3);
-					
+						
 					}else{
 						anim.SetBool ("Dash", false);
 						anim.SetTrigger ("Jump");
@@ -79,7 +79,6 @@ public class Player : MonoBehaviour {
 				if (Input.GetKeyDown ("z")) {
 					anim.SetTrigger ("Shot");
 					Instantiate (bullet, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
-					GetComponent<AudioSource>().Play();
 				}
 			}
 		}
@@ -106,18 +105,18 @@ public class Player : MonoBehaviour {
 					transform.localScale = temp;
 					anim.SetBool ("Dash", true);
 				}
-//				if (transform.position.x > mainCamera.transform.position.x - 4) {
-//					Vector3 cameraPos = mainCamera.transform.position;
-//					cameraPos.x = transform.position.x + 4;
-//					mainCamera.transform.position = cameraPos;
-//				}
-//
-//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
-//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
-//				Vector2 pos = transform.position;
-//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
-//
-//				transform.position = pos;
+				//				if (transform.position.x > mainCamera.transform.position.x - 4) {
+				//					Vector3 cameraPos = mainCamera.transform.position;
+				//					cameraPos.x = transform.position.x + 4;
+				//					mainCamera.transform.position = cameraPos;
+				//				}
+				//
+				//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+				//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+				//				Vector2 pos = transform.position;
+				//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
+				//
+				//				transform.position = pos;
 				
 			} else {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
@@ -131,17 +130,16 @@ public class Player : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col){
-		if (!gameClear) {
-			if (col.gameObject.tag == "Enemy") {
-				Destroy (col.gameObject);
-				if (gameOver == false) {
-					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
-				}
-				GameOver ();
+		
+		if (col.gameObject.tag == "Enemy") {
+			Destroy(col.gameObject);
+			if(gameOver == false){
+				Instantiate(explosion,transform.position + new Vector3(0,1,0),transform.rotation);
 			}
-			if (col.gameObject.tag == "DestroyArea") {
-				GameOver ();
-			}
+			GameOver();
+		}
+		if (col.gameObject.tag == "DestroyArea") {
+			GameOver();
 		}
 	}
 	
@@ -154,9 +152,9 @@ public class Player : MonoBehaviour {
 	}
 	
 	public void GameOver(){
-//		gameOver = true;
+		//		gameOver = true;
 		Destroy (gameObject);
-//		gameOverText.enabled = true;
+		//		gameOverText.enabled = true;
 		Debug.Log (canvas);
 		foreach (Transform child in canvas.transform){
 			if(child.name == "GameOver"){

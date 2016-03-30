@@ -16,9 +16,14 @@ public class EnemyBullet : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D col){
+		if (col.gameObject.tag == "Enemy") {
+			return;
+		}
+
+		Destroy(gameObject);
 
 		if (col.gameObject.tag == "Buyer") {
-			Destroy(gameObject);
+//			Destroy(gameObject);
 			int hp = col.gameObject.GetComponent<Player>().hp;
 			hp  -= power;
 			if(hp <= 0){

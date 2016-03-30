@@ -21,12 +21,18 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.gameObject.tag == "Enemy") {
-			Destroy(gameObject);
+		if(col.gameObject.tag == "Buyer"){
+			return;
 		}
-		if (col.gameObject.tag == "BreakBlock") {
-			Destroy(gameObject);
-		}
+
+		Destroy(gameObject);
+//		
+//		if (col.gameObject.tag == "Enemy") {
+//			Destroy(gameObject);
+//		}
+//		if (col.gameObject.tag == "BreakBlock") {
+//			Destroy(gameObject);
+//		}
 	}
 	
 }

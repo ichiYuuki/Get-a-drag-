@@ -12,36 +12,41 @@ public class Enemy1 : MonoBehaviour {
 	private Life life;
 	private const string MAIN_CAMERA_NAME = "MainCamera";
 	private bool _isRendered = false;
-	public float shotDelay = 1f;
+
 	public GameObject bullet;
+
+	//shot
+	public float shotDelay = 1f;
 	public bool canShot = false;
+	public bool shotbool = false;
 
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
 
-		while(canShot == true){
-			Shot();
-
-			yield return new WaitForSeconds(shotDelay);
+		while (canShot == true) {
+			Shot ();
+			
+			yield return new WaitForSeconds (shotDelay);
 		}
+
 //		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
 
 	void Update () {
 		if(_isRendered){
 			rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
+			shotbool = true;
 		}
 
 		if(gameObject.transform.position.y < Camera.main.transform.position.y -8 || gameObject.transform.position.x < Camera.main.transform.position.x -10){
 			Destroy(gameObject);
 		}
-
 	}
 
 	void OnTriggerEnter2D (Collider2D col){
 
 		if(_isRendered){
-			if(col.tag == "Bullet"){
+			if(col.tag == "Bullet" && col.gameObject.name == "Bullet(Clone)"){
 				int bulletPower = col.gameObject.GetComponent<Bullet>().power;
 				hp -= bulletPower;
 				if(hp <= 0){

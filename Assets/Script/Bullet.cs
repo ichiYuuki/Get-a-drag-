@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if(col.gameObject.tag == "Buyer"){
+		if(col.gameObject.tag == "Buyer" || col.gameObject.tag == "Bullet"){
 			return;
 		}
 

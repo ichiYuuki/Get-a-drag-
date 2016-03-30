@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System;
 
 public class Player : MonoBehaviour {
+	
 	public int hp = 10; 
 	public float speed = 4f;
 	public float jumpPower = 700;
@@ -40,13 +41,6 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update(){
-		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-		string times = Convert.ToString(time.text);
-		float sum;
-		float.TryParse (times, out sum);
-		//		Debug.Log(time.text);
-		//		Debug.Log(times);
-		//		Debug.Log(sum);
 		isGrounded = Physics2D.Linecast (
 			transform.position + transform.up * 1,
 			transform.position - transform.up * 0.07f,
@@ -55,18 +49,10 @@ public class Player : MonoBehaviour {
 		if (!gameClear) {
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
-					if(sum == 0){
-						anim.SetBool ("Dash", false);
-						anim.SetTrigger ("Jump");
-						isGrounded = false;
-						rigidbody2D.AddForce (Vector2.up * jumpPower*2/3);
-						
-					}else{
-						anim.SetBool ("Dash", false);
-						anim.SetTrigger ("Jump");
-						isGrounded = false;
-						rigidbody2D.AddForce (Vector2.up * jumpPower);
-					}
+					anim.SetBool ("Dash", false);
+					anim.SetTrigger ("Jump");
+					isGrounded = false;
+					rigidbody2D.AddForce (Vector2.up * jumpPower);
 				}
 			}
 			float velY = rigidbody2D.velocity.y;
@@ -79,46 +65,35 @@ public class Player : MonoBehaviour {
 				if (Input.GetKeyDown ("z")) {
 					anim.SetTrigger ("Shot");
 					Instantiate (bullet, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
+					GetComponent<AudioSource>().Play();
 				}
 			}
 		}
 	}
 	
 	void FixedUpdate () {
-		Text time = GameObject.Find ("Time").GetComponent<Text> ();
-		string times = Convert.ToString(time.text);
-		float sum;
-		float.TryParse (times, out sum);
 		if (!gameClear) {
 			float x = Input.GetAxisRaw ("Horizontal");
 			if (x != 0) {
-				if(sum == 0){
-					rigidbody2D.velocity = new Vector2 (x * speed/2, rigidbody2D.velocity.y);
-					Vector2 temp = transform.localScale;
-					temp.x = x;
-					transform.localScale = temp;
-					anim.SetBool ("Dash", true);
-				}else{
-					rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
-					Vector2 temp = transform.localScale;
-					temp.x = x;
-					transform.localScale = temp;
-					anim.SetBool ("Dash", true);
-				}
-				//				if (transform.position.x > mainCamera.transform.position.x - 4) {
-				//					Vector3 cameraPos = mainCamera.transform.position;
-				//					cameraPos.x = transform.position.x + 4;
-				//					mainCamera.transform.position = cameraPos;
-				//				}
-				//
-				//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
-				//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
-				//				Vector2 pos = transform.position;
-				//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
-				//
-				//				transform.position = pos;
-				
-			} else {
+				rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
+				Vector2 temp = transform.localScale;
+				temp.x = x;
+				transform.localScale = temp;
+				anim.SetBool ("Dash", true);
+			}
+			//				if (transform.position.x > mainCamera.transform.position.x - 4) {
+			//					Vector3 cameraPos = mainCamera.transform.position;
+			//					cameraPos.x = transform.position.x + 4;
+			//					mainCamera.transform.position = cameraPos;
+			//				}
+			//
+			//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+			//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+			//				Vector2 pos = transform.position;
+			//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
+			//
+			//				transform.position = pos;
+			else {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 				anim.SetBool ("Dash", false);
 			}
@@ -130,16 +105,22 @@ public class Player : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D col){
-		
-		if (col.gameObject.tag == "Enemy") {
-			Destroy(col.gameObject);
-			if(gameOver == false){
-				Instantiate(explosion,transform.position + new Vector3(0,1,0),transform.rotation);
+		if (!gameClear) {
+			if (col.gameObject.tag == "Enemy") {
+				if(hp > 1){
+					hp -= 1;
+					return;
+				}
+				
+				Destroy (col.gameObject);
+				if (gameOver == false) {
+					//					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
+				}
+				GameOver ();
 			}
-			GameOver();
-		}
-		if (col.gameObject.tag == "DestroyArea") {
-			GameOver();
+			if (col.gameObject.tag == "DestroyArea") {
+				GameOver ();
+			}
 		}
 	}
 	
@@ -154,6 +135,7 @@ public class Player : MonoBehaviour {
 	public void GameOver(){
 		//		gameOver = true;
 		Destroy (gameObject);
+		Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
 		//		gameOverText.enabled = true;
 		Debug.Log (canvas);
 		foreach (Transform child in canvas.transform){
@@ -162,6 +144,4 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
-	
-	
 }

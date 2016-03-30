@@ -11,9 +11,18 @@ public class Enemy1 : MonoBehaviour {
 	private Life life;
 	private const string MAIN_CAMERA_NAME = "MainCamera";
 	private bool _isRendered = false;
+	public float shotDelay = 1f;
+	public GameObject bullet;
+	public bool canShot = false;
 
-	void Start () {
+	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
+
+		while(canShot == true){
+			Shot();
+
+			yield return new WaitForSeconds(shotDelay);
+		}
 //		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
 
@@ -29,16 +38,18 @@ public class Enemy1 : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D col){
+
 		if(_isRendered){
 			if(col.tag == "Bullet"){
 				Destroy(gameObject);
 				Instantiate(explosion, transform.position, transform.rotation);
 
-				if(Random.Range(0,4) == 0){
-					Instantiate(item, transform.position, transform.rotation);
-				}
+//				if(Random.Range(0,4) == 0){
+//					Instantiate(item, transform.position, transform.rotation);
+//				}
 			}
 		}
+
 	}
 
 //	void OnCollisionEnter2D(Collision2D col){
@@ -51,6 +62,11 @@ public class Enemy1 : MonoBehaviour {
 		if (Camera.current.tag == MAIN_CAMERA_NAME) {
 			_isRendered = true;
 		}
+	}
+
+	void Shot(){
+//		AudioSource.Play();
+		Instantiate (bullet, transform.position, transform.rotation);
 	}
 
 }

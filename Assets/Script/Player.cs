@@ -5,7 +5,8 @@ using System.Text.RegularExpressions;
 using System;
 
 public class Player : MonoBehaviour {
-	
+
+	public int hp = 10; 
 	public float speed = 4f;
 	public float jumpPower = 700;
 	public LayerMask groundLayer;
@@ -106,9 +107,14 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 		if (!gameClear) {
 			if (col.gameObject.tag == "Enemy") {
+				if(hp > 1){
+					hp -= 1;
+					return;
+				}
+
 				Destroy (col.gameObject);
 				if (gameOver == false) {
-					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
+//					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
 				}
 				GameOver ();
 			}
@@ -129,6 +135,7 @@ public class Player : MonoBehaviour {
 	public void GameOver(){
 //		gameOver = true;
 		Destroy (gameObject);
+		Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
 //		gameOverText.enabled = true;
 		Debug.Log (canvas);
 		foreach (Transform child in canvas.transform){
@@ -137,6 +144,4 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
-	
-	
 }

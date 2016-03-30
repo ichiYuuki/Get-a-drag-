@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy1 : MonoBehaviour {
 
+	public int hp = 3;
 	Rigidbody2D rigidbody2D;
 	public int speed = -3;
 	public GameObject explosion;
@@ -41,8 +42,12 @@ public class Enemy1 : MonoBehaviour {
 
 		if(_isRendered){
 			if(col.tag == "Bullet"){
-				Destroy(gameObject);
-				Instantiate(explosion, transform.position, transform.rotation);
+				int bulletPower = col.gameObject.GetComponent<Bullet>().power;
+				hp -= bulletPower;
+				if(hp <= 0){
+					Destroy(gameObject);
+					Instantiate(explosion, transform.position, transform.rotation);
+				}
 
 //				if(Random.Range(0,4) == 0){
 //					Instantiate(item, transform.position, transform.rotation);
@@ -66,6 +71,7 @@ public class Enemy1 : MonoBehaviour {
 
 	void Shot(){
 //		AudioSource.Play();
+		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
 		Instantiate (bullet, transform.position, transform.rotation);
 	}
 

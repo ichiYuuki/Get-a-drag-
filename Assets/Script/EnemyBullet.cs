@@ -5,7 +5,7 @@ public class EnemyBullet : MonoBehaviour {
 
 //	private GameObject player;
 	public int speed = 10;
-	public int power = 3;
+	public int power = 0;
 	public float destroyTime = 5f;
 	
 	void Start () {

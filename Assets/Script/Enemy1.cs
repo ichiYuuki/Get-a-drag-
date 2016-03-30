@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy1 : MonoBehaviour {
 
+	public int hp = 3;
 	Rigidbody2D rigidbody2D;
 	public int speed = -3;
 	public GameObject explosion;
@@ -12,8 +13,28 @@ public class Enemy1 : MonoBehaviour {
 	private const string MAIN_CAMERA_NAME = "MainCamera";
 	private bool _isRendered = false;
 
-	void Start () {
+	public GameObject bullet;
+
+	//shot
+	public float shotDelay = 1f;
+	public bool canShot = false;
+	public bool shotbool = false;
+
+	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
+
+		while(shotbool == false){
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		while (canShot == true) {
+			Shot ();
+			
+			yield return new WaitForSeconds (shotDelay);
+		}
+
+
 //		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
 
@@ -29,16 +50,22 @@ public class Enemy1 : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D col){
-		if(_isRendered){
-			if(col.tag == "Bullet"){
-				Destroy(gameObject);
-				Instantiate(explosion, transform.position, transform.rotation);
 
-				if(Random.Range(0,4) == 0){
-					Instantiate(item, transform.position, transform.rotation);
+		if(_isRendered){
+			if(col.tag == "Bullet" && col.gameObject.name == "Bullet(Clone)"){
+				int bulletPower = col.gameObject.GetComponent<Bullet>().power;
+				hp -= bulletPower;
+				if(hp <= 0){
+					Destroy(gameObject);
+					Instantiate(explosion, transform.position, transform.rotation);
 				}
+
+//				if(Random.Range(0,4) == 0){
+//					Instantiate(item, transform.position, transform.rotation);
+//				}
 			}
 		}
+
 	}
 
 //	void OnCollisionEnter2D(Collision2D col){
@@ -50,7 +77,13 @@ public class Enemy1 : MonoBehaviour {
 	void OnWillRenderObject(){
 		if (Camera.current.tag == MAIN_CAMERA_NAME) {
 			_isRendered = true;
+			shotbool = true;
 		}
 	}
 
+	void Shot(){
+//		AudioSource.Play();
+		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
+		Instantiate (bullet, transform.position, transform.rotation);
+	}
 }

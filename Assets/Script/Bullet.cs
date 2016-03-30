@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
 
 	private GameObject player;
 	private int speed = 10;
+	public int power = 2;
 
 	void Start () {
 		player = GameObject.FindWithTag ("Buyer");
@@ -20,12 +21,18 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.gameObject.tag == "Enemy") {
-			Destroy(gameObject);
+		if(col.gameObject.tag == "Buyer" || col.gameObject.tag == "Bullet"){
+			return;
 		}
-		if (col.gameObject.tag == "BreakBlock") {
-			Destroy(gameObject);
-		}
+
+		Destroy(gameObject);
+//		
+//		if (col.gameObject.tag == "Enemy") {
+//			Destroy(gameObject);
+//		}
+//		if (col.gameObject.tag == "BreakBlock") {
+//			Destroy(gameObject);
+//		}
 	}
 	
 }

@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour {
 	RaycastHit2D shotHit;  
 	ParticleSystem beamParticle;
 	LineRenderer lineRenderer;
-	GameObject player;
+//	GameObject player;
 	float i = 0.25f;
 	public float LaserWidth = 0.9f;
 	bool destroy = false;
@@ -21,7 +21,7 @@ public class Laser : MonoBehaviour {
 		effectDisplayTime = beamParticle.duration + beamParticle.startLifetime -1f;
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineRenderer.enabled = false;
-		player = GameObject.FindWithTag ("Player");
+//		player = GameObject.FindWithTag ("Player");
 		Vector2 pos = transform.position;
 		pos.y += 0.20f;
 		transform.position = pos;

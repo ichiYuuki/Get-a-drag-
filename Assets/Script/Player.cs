@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System;
 
 public class Player : MonoBehaviour {
-	
+	public int hp = 10; 
 	public float speed = 4f;
 	public float jumpPower = 700;
 	public LayerMask groundLayer;

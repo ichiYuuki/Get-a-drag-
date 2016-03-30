@@ -4,13 +4,16 @@ using UnityEngine.UI;
 
 public class ClearZone : MonoBehaviour {
 
-	public Text clearText;
-	private bool gameClear;
-	
+//	public Text clearText;
+	public static bool gameClear;
+
+	void Start(){
+		gameClear = false;
+	}
+
 	void FixedUpdate () {
 		if (gameClear) {
-			clearText.enabled = true;
-			Invoke ("CallStage2", 4);
+			Invoke ("CallStage", 4);
 		}
 	}
 
@@ -20,11 +23,18 @@ public class ClearZone : MonoBehaviour {
 		}
 	}
 
-	void CallTitle(){
-		Application.LoadLevel ("Title");
-	}
+//	void CallTitle(){
+//		if(Application.loadedLevelName == "test_ichi"){
+//			Application.LoadLevel ("Title");
+//		}
+//	}
 
-	void CallStage2(){
-		Application.LoadLevel ("Stage2");
+	void CallStage(){
+		if(Application.loadedLevelName == "test_ichi"){
+			Application.LoadLevel ("test_ichi1");
+		}
+		if(Application.loadedLevelName == "test_ichi1"){
+			Application.LoadLevel ("Title");
+		}
 	}
 }

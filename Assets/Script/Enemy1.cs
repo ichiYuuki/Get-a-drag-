@@ -23,11 +23,17 @@ public class Enemy1 : MonoBehaviour {
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
 
+		while(shotbool == false){
+
+			yield return new WaitForEndOfFrame();
+		}
+
 		while (canShot == true) {
 			Shot ();
 			
 			yield return new WaitForSeconds (shotDelay);
 		}
+
 
 //		life = GameObject.FindGameObjectWithTag ("HP").GetComponent<Life> ();
 	}
@@ -35,12 +41,12 @@ public class Enemy1 : MonoBehaviour {
 	void Update () {
 		if(_isRendered){
 			rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
-			shotbool = true;
 		}
 
 		if(gameObject.transform.position.y < Camera.main.transform.position.y -8 || gameObject.transform.position.x < Camera.main.transform.position.x -10){
 			Destroy(gameObject);
 		}
+
 	}
 
 	void OnTriggerEnter2D (Collider2D col){
@@ -71,6 +77,7 @@ public class Enemy1 : MonoBehaviour {
 	void OnWillRenderObject(){
 		if (Camera.current.tag == MAIN_CAMERA_NAME) {
 			_isRendered = true;
+			shotbool = true;
 		}
 	}
 
@@ -79,5 +86,4 @@ public class Enemy1 : MonoBehaviour {
 		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
 		Instantiate (bullet, transform.position, transform.rotation);
 	}
-
 }

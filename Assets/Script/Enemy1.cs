@@ -18,7 +18,7 @@ public class Enemy1 : MonoBehaviour {
 	//shot
 	public float shotDelay = 1f;
 	public bool canShot = false;
-	public bool shotbool = false;
+	private bool shotbool = false;
 
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();

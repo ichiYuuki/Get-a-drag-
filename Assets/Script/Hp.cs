@@ -3,15 +3,22 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Hp : MonoBehaviour {
-    private Slider slider;
-    private float hp = 100; //初期体力
+
+    private Slider HpBar;
+    private Player player;
+    private GameObject unity;
+    private int hp;
 
     void Start () {
-        slider = GameObject.Find("Slider").GetComponent<Slider>();
+        HpBar = GameObject.Find("HpBar").GetComponent<Slider>();
+        unity = GameObject.Find("UnityChan");
+        player = unity.GetComponent<Player>();
+        
     }
 
     void Update () {
-        //hp -= 1f;
-        slider.value = hp;
+        hp = player.hp;
+        HpBar.value = hp;
+        Debug.Log(hp);
 	}
 }

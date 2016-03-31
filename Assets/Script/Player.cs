@@ -115,8 +115,8 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 		if (!gameClear) {
 			if (col.gameObject.tag == "Enemy") {
-				if(hp > 1){
-					hp -= 1;
+				hp -= 1;
+				if(hp > 0){
 					return;
 				}
 				
@@ -154,6 +154,6 @@ public class Player : MonoBehaviour {
 	}
 
 	void shot(GameObject obj){
-		Instantiate (obj, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
+		Instantiate (obj, transform.position + new Vector3 (0f, 1.0f, 0f), transform.rotation);
 	}
 }

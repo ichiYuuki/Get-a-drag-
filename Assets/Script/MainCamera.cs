@@ -24,13 +24,15 @@ public class MainCamera : MonoBehaviour {
 			}
 			float playerHeight = playerTrans.position.y;
 			float currentCameraHeight = transform.position.y;
+//			Debug.Log(playerHeight + "," + currentCameraHeight);
 			float newHeight = Mathf.Lerp (currentCameraHeight, playerHeight, 0.5f);
-			if (playerHeight > currentCameraHeight) {
-				transform.position = new Vector3 (transform.position.x, newHeight, transform.position.z);
-			}
-			if(playerHeight < currentCameraHeight){
-				transform.position = new Vector3 (transform.position.x, newHeight, transform.position.z);
-			}
+			transform.position = new Vector3 (transform.position.x, newHeight, transform.position.z);
+//			if (playerHeight > currentCameraHeight) {
+//				transform.position = new Vector3 (transform.position.x, newHeight, transform.position.z);
+//			}
+//			if(playerHeight < currentCameraHeight){
+//				transform.position = new Vector3 (transform.position.x, newHeight, transform.position.z);
+//			}
 		}
 
 	}

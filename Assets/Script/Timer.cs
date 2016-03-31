@@ -33,6 +33,6 @@ public class Timer : MonoBehaviour
             explosion.PlayerExplosion();
             gameEnd.SetActive(true);
         }
-        GetComponent<Text>().text = ((int)time).ToString();
+        GetComponent<Text>().text = ((int)time).ToString();       
     }
 }

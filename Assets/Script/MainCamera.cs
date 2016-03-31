@@ -12,6 +12,7 @@ public class MainCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+//		Debug.Log (GetComponent<Camera>().WorldToViewportPoint(Vector3.zero));
 		if (player) {
 			
 			transform.position = new Vector3 (player.transform.position.x, 5,-10);

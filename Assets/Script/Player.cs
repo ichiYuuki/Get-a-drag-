@@ -13,7 +13,9 @@ public class Player : MonoBehaviour {
 	
 	public GameObject explosion;
 	public GameObject mainCamera;
-	public GameObject bullet;
+	public GameObject[] bullet = new GameObject[3];
+	private int bulletNum = 0;
+
 	//	public Life life;
 	public Death death;
 	public Energy energy;
@@ -30,7 +32,6 @@ public class Player : MonoBehaviour {
 	public Canvas canvas;
 	//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
 	void Start () {
-		
 		anim = GetComponent<Animator> ();
 		rigidbody2D = GetComponent<Rigidbody2D>();
 		renderer = GetComponent<Renderer>();
@@ -61,13 +62,20 @@ public class Player : MonoBehaviour {
 			anim.SetBool ("isJumping", isJumping);
 			anim.SetBool ("isFalling", isFalling);
 			
-			if(!gameClear){
-				if (Input.GetKeyDown ("z")) {
-					anim.SetTrigger ("Shot");
-					Instantiate (bullet, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
-					GetComponent<AudioSource>().Play();
-				}
+//			if(!gameClear){
+			if (Input.GetKeyDown ("z")) {
+				anim.SetTrigger ("Shot");
+				shot (bullet[bulletNum]);
+				GetComponent<AudioSource>().Play();
 			}
+
+//			if(なんかのボタン押されたらのif文){
+//				bulletNum += 1;
+//				if(bulletNum >= bullet.Length){
+//					bulletNum = 0;
+//				}
+//			}
+
 		}
 	}
 	
@@ -143,5 +151,9 @@ public class Player : MonoBehaviour {
 				child.gameObject.SetActive(true);
 			}
 		}
+	}
+
+	void shot(GameObject obj){
+		Instantiate (obj, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
 	}
 }

@@ -17,7 +17,7 @@ public class GameResult : Stopwatch {
 			if (PlayerPrefs.HasKey ("HighScre_a")) {
 				highScre = PlayerPrefs.GetFloat ("HighScre_a");
 			} else {
-				highScre = 1000;
+				highScre = 5999;
 			} 
 		}
 
@@ -25,10 +25,10 @@ public class GameResult : Stopwatch {
 			if (PlayerPrefs.HasKey ("HighScre_b")) {
 				highScre00 = PlayerPrefs.GetFloat ("HighScre_b");
 			} else {
-				highScre00 = 1000;
+				highScre00 = 5999;
 			} 
 		}
-		Debug.Log (highScre + " StarthighScre");
+//		Debug.Log (highScre + " StarthighScre");
 	}
 	
 	
@@ -51,9 +51,9 @@ public class GameResult : Stopwatch {
 					PlayerPrefs.SetFloat("HighScre_a",result);
 				}
 			}
-			Debug.Log(Secs + "Secs");
-			Debug.Log(clearTime.text);
-			Debug.Log(highScre + "highScre");
+//			Debug.Log(Secs + "Secs");
+//			Debug.Log(clearTime.text);
+//			Debug.Log(highScre + "highScre");
 
 			if(Application.loadedLevelName == "test_ichi1"){
 				bestTime.text = "BestTime:   " + keisan(highScre00);
@@ -64,7 +64,7 @@ public class GameResult : Stopwatch {
 				}
 			}
 		}
-//				PlayerPrefs.DeleteAll();//データ初期化
+				PlayerPrefs.DeleteAll();//データ初期化
 //				Debug.Log(Application.loadedLevelName);
 //				Debug.Log (PlayerPrefs.GetInt ("HighScre00"));
 	}
@@ -75,7 +75,7 @@ public class GameResult : Stopwatch {
 //		String H = String.Format ("{0:D2}", (int)h);
 		String K = String.Format ("{0:D2}", (int)k);
 		String G = String.Format ("{0:D2}", (int)g);
-		Debug.Log(String.Format("{0:D2}",(int)k) + " debug K");
+//		Debug.Log(String.Format("{0:D2}",(int)k) + " debug K");
 //		Debug.Log(g);
 		return (int)h + ":" + K + "." + G;
 

@@ -13,9 +13,9 @@ public class Stopwatch : MonoBehaviour {
 
 	void Start () {
 		//シーンごとにタイムリセットに必要
-//		DecCount = 0;
-//		MinCount = 0;
-//		SecCount = 0;
+		DecCount = 0;
+		MinCount = 0;
+		SecCount = 0;
 	}
 
 	void Update () {

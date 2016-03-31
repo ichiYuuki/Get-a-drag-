@@ -56,11 +56,11 @@ public class GameResult : Stopwatch {
 			Debug.Log(highScre + "highScre");
 
 			if(Application.loadedLevelName == "test_ichi1"){
-				bestTime.text = "BestTime:" + highScre00;
+				bestTime.text = "BestTime:   " + keisan(highScre00);
 			}
 			if(Application.loadedLevelName == "test_ichi1"){
 				if(highScre00 > result){
-					PlayerPrefs.SetFloat("HighScre00", result);
+					PlayerPrefs.SetFloat("HighScre_b", result);
 				}
 			}
 		}

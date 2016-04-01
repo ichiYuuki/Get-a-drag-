@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class MainCamera : MonoBehaviour {
@@ -17,6 +17,7 @@ public class MainCamera : MonoBehaviour {
 //		Debug.Log (GetComponent<Camera>().WorldToViewportPoint(Vector3.zero));
 		if (player) {
 			Target();
+			//bossステージ来たらifとboolか何かでBossBattle()に切り替え
 		}
 	}
 
@@ -46,5 +47,6 @@ public class MainCamera : MonoBehaviour {
 		if (transform.position.x < bossStage.transform.position.x) {
 			transform.position = transform.position + Vector3.right * speed * Time.deltaTime;
 		}
+		//カメラ遷移が終わったらボスの挙動スタート？
 	}
 }

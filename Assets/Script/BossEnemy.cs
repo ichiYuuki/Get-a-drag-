@@ -9,6 +9,9 @@ public class BossEnemy : MonoBehaviour {
 	public float shotDelay = 2f;
 	public GameObject bullet;
 	public GameObject[] shotPoint;
+	public GameObject[] homingShot;
+	public GameObject target;
+	public GameObject explosion;
 	public bool canMove = false;
 	public int num = 0;
 	float time = 0;
@@ -28,8 +31,16 @@ public class BossEnemy : MonoBehaviour {
 				shot (bullet, shotPoint[i].transform);
 			}
 
+			for(int i = 0; i < homingShot.Length; i++){
+				homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, target.transform.position));
+
+				shot (bullet, homingShot[i].transform);
+				homingShot[i].transform.eulerAngles = Vector3.zero;
+			}
+
 			yield return new WaitForSeconds(shotDelay);
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -53,4 +64,23 @@ public class BossEnemy : MonoBehaviour {
 			break;
 		}
 	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		if(col.tag == "Bullet" && col.gameObject.name == "Bullet(Clone)"){
+			int bulletPower = col.gameObject.GetComponent<Bullet>().power;
+			hp -= bulletPower;
+			if(hp <= 0){
+				Destroy(gameObject);
+				Instantiate(explosion, transform.position, transform.rotation);
+			}
+		}
+	}
+
+	float Homing(Vector3 p1, Vector3 p2){
+		float dx = p1.x - p2.x;
+		float dy = p1.y - p2.y;
+		float rad = Mathf.Atan2(dy, dx);
+		return rad * Mathf.Rad2Deg;
+	}
+	
 }

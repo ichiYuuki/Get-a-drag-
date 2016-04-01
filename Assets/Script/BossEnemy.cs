@@ -78,7 +78,7 @@ public class BossEnemy : MonoBehaviour {
 
 	float Homing(Vector3 p1, Vector3 p2){
 		float dx = p1.x - p2.x;
-		float dy = p1.y - p2.y;
+		float dy = p1.y - (p2.y + 0.5f);
 		float rad = Mathf.Atan2(dy, dx);
 		return rad * Mathf.Rad2Deg;
 	}

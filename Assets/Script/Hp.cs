@@ -2,56 +2,52 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Hp : MonoBehaviour {
+public class Hp : MonoBehaviour
+{
 
     private Slider HpBar;
     private Player player;
-    private Renderer re;
     private GameObject unity;
     private int hp;
-
-    void Start () {
+    public GameObject Fill;
+    private Color color;
+    void Start()
+    {
         HpBar = GameObject.Find("HpBar").GetComponent<Slider>();
         unity = GameObject.Find("UnityChan");
         player = unity.GetComponent<Player>();
-        re = player.GetComponent<Renderer>();
-
+        color = GameObject.Find("Fill").GetComponent<Image>().color;
+             
     }
 
-    void Update () {
+    void Update()
+    {
         hp = player.hp;
         HpBar.value = hp;
         Debug.Log(hp);
+        HpColor();
+    }
 
-        //hpが減ったら処理をする
-        //まだ途中
-        if (hp == 9)
+    //体力の値で色を変える
+    private void HpColor()
+    {       
+        //hpが7～１０の時
+        if (hp >= 7 && hp < 10)
         {
-            Debug.Log("ダメージを受けた");
-            StartCoroutine("Damage");
+            //緑色
+            color = Fill.GetComponent<Image>().color = new Color(0, 255, 0);
         }
-	}
-
-    IEnumerator Damage()
-    {
-        //レイヤーをPlayerDamageに変更
-        gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
-        //while文を10回ループ
-        int count = 10;
-
-        while (count > 0)
+        //hpが６～3の時
+        else if (hp >= 4 && hp < 7)
         {
-            //透明にする
-            re.material.color = new Color(1, 1, 1, 0);
-            //0.15秒待つ
-            yield return new WaitForSeconds(0.15f);
-            //元に戻す
-            re.material.color = new Color(1, 1, 1, 1);
-            //0.15秒待つ
-            yield return new WaitForSeconds(0.15f);
-            count--;
+            //黄色
+            color = Fill.GetComponent<Image>().color = new Color(255, 255, 0);
         }
-        //レイヤーをPlayerに戻す
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        //hpが３～０の時
+        else if (hp >= 0 && hp < 3)
+        {
+            //赤色
+            color = Fill.GetComponent<Image>().color = new Color(255, 0, 0);
+        }
     }
 }

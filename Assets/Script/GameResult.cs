@@ -6,6 +6,7 @@ using System;
 public class GameResult : Stopwatch {
 	private float highScre;
 	private float highScre00;
+	private float bondScre;
 	//	List<int> highScre = new List<int> ();
 	
 	public Text clearTime;
@@ -26,6 +27,14 @@ public class GameResult : Stopwatch {
 				highScre00 = PlayerPrefs.GetFloat ("HighScre_b");
 			} else {
 				highScre00 = 5999;
+			} 
+		}
+
+		if(Application.loadedLevelName == "BondStage"){
+			if (PlayerPrefs.HasKey ("BondScre")) {
+				bondScre = PlayerPrefs.GetFloat ("BondScre");
+			} else {
+				bondScre = 5999;
 			} 
 		}
 //		Debug.Log (highScre + " StarthighScre");
@@ -63,8 +72,17 @@ public class GameResult : Stopwatch {
 					PlayerPrefs.SetFloat("HighScre_b", result);
 				}
 			}
+
+			if(Application.loadedLevelName == "BondStage"){
+				bestTime.text = "BestTime:   " + keisan(bondScre);//keisan(highs)
+			}
+			if(Application.loadedLevelName == "BondStage"){
+				if(bondScre > result){
+					PlayerPrefs.SetFloat("BondScre",result);
+				}
+			}
 		}
-				PlayerPrefs.DeleteAll();//データ初期化
+//				PlayerPrefs.DeleteAll();//データ初期化
 //				Debug.Log(Application.loadedLevelName);
 //				Debug.Log (PlayerPrefs.GetInt ("HighScre00"));
 	}

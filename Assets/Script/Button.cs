@@ -32,13 +32,16 @@ public class Button : MonoBehaviour {
 		if(Application.loadedLevelName == "MainTitle"){
 			check = true;
 //			Application.LoadLevel("MainStage1");
-//			Invoke("MainTitle",3);
 			StartCoroutine("change");
 		}
 	}
+	public void highScre(){
+		Debug.Log ("result");
+	}
 
 	IEnumerator change(){
-		yield return new WaitForSeconds(5);
-		Application.LoadLevel("MainStage1");
+		yield return new WaitForSeconds(4);
+//		Application.LoadLevel("MainStage1");
+		Application.LoadLevel("BondStage");
 	}
 }

@@ -36,5 +36,8 @@ public class ClearZone : MonoBehaviour {
 		if(Application.loadedLevelName == "test_ichi1"){
 			Application.LoadLevel ("Title");
 		}
+		if(Application.loadedLevelName == "BondStage"){
+			Application.LoadLevel ("Ending");
+		}
 	}
 }

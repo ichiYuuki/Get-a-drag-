@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	
 	public GameObject explosion;
 	public GameObject mainCamera;
-	public GameObject[] bullet = new GameObject[3];
+	public GameObject[] bullet = new GameObject[1];
 	private int bulletNum = 0;
 
 	//	public Life life;
@@ -82,25 +82,28 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
 		if (!gameClear) {
 			float x = Input.GetAxisRaw ("Horizontal");
+			MoveLimit();
 			if (x != 0) {
 				rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
 				Vector2 temp = transform.localScale;
 				temp.x = x;
 				transform.localScale = temp;
+
 				anim.SetBool ("Dash", true);
 			}
-			//				if (transform.position.x > mainCamera.transform.position.x - 4) {
-			//					Vector3 cameraPos = mainCamera.transform.position;
-			//					cameraPos.x = transform.position.x + 4;
-			//					mainCamera.transform.position = cameraPos;
-			//				}
-			//
-			//				Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
-			//				Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
-			//				Vector2 pos = transform.position;
-			//				pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
-			//
-			//				transform.position = pos;
+//			if (transform.position.x > mainCamera.transform.position.x - 4) {
+//				Vector3 cameraPos = mainCamera.transform.position;
+//				cameraPos.x = transform.position.x + 4;
+//				mainCamera.transform.position = cameraPos;
+//			}
+//
+//			Vector2 min = Camera.main.ViewportToWorldPoint (new Vector2 (0, 0));
+//			Vector2 max = Camera.main.ViewportToWorldPoint (new Vector2 (1, 1));
+//			Vector2 pos = transform.position;
+//			pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x);
+//
+//			transform.position = pos;
+
 			else {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 				anim.SetBool ("Dash", false);
@@ -139,28 +142,21 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-//	void MoveLimit(){
-//		// 画面左下のワールド座標をビューポートから取得
-//		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-//		
-//		// 画面右上のワールド座標をビューポートから取得
-//		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-//		
-//		// プレイヤーの座標を取得
-//		Vector2 pos = transform.position;
-//		
-//		speed = spaceship.speed;
-//		
-//		// 移動量を加える
-//		pos += direction  * speed * Time.deltaTime;
-//		
-//		// プレイヤーの位置が画面内に収まるように制限をかける
-//		pos.x = Mathf.Clamp (pos.x, min.x, max.x);
-//		pos.y = Mathf.Clamp (pos.y, min.y, max.y);
-//		
-//		// 制限をかけた値をプレイヤーの位置とする
-//		transform.position = pos;
-//	}
+	void MoveLimit(){
+		// 画面左下のワールド座標をビューポートから取得
+		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+		
+		// 画面右上のワールド座標をビューポートから取得
+		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+		Vector2 pos = transform.position;
+		
+		// プレイヤーの位置が画面内に収まるように制限をかける
+		pos.x = Mathf.Clamp (pos.x, min.x + 0.5f, max.x - 0.5f);
+
+		// 制限をかけた値をプレイヤーの位置とする
+		transform.position = pos;
+	}
 	
 	public void GameOver(){
 		//		gameOver = true;

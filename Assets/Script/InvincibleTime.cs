@@ -24,7 +24,7 @@ public class InvincibleTime : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         //Enemyとぶつかった時にコルーチンを実行
-        if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "Bullet")
+        if (col.gameObject.tag == "Enemy")
         {
             StartCoroutine("Damage");
         }

@@ -7,8 +7,9 @@ public class EnemyBullet : MonoBehaviour {
 	public int speed = 10;
 	public int power = 0;
 	public float destroyTime = 5f;
-	
-	void Start () {
+    private GameObject player;
+
+    void Start () {
 //		player = GameObject.FindWithTag ("Enemy");
 
 		GetComponent<Rigidbody2D>().velocity = transform.right * -1 * speed;
@@ -16,10 +17,7 @@ public class EnemyBullet : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.gameObject.tag == "Enemy" || col.gameObject.tag == "Bullet") {
-			return;
-		}
-
+		
 		Destroy(gameObject);
 
 		if (col.gameObject.tag == "Buyer") {
@@ -27,10 +25,10 @@ public class EnemyBullet : MonoBehaviour {
 			int hp = col.gameObject.GetComponent<Player>().hp;
 			hp  -= power;
 			if(hp <= 0){
-//				col.gameObject.GetComponent<Player>().GameOver();
-			}else{
-				col.gameObject.GetComponent<Player>().hp = hp;
-			}
+                player = GameObject.Find("UnityChan");                
+                Destroy(player);               
+            }
+            col.gameObject.GetComponent<Player>().hp = hp;			
 		}
 		if (col.gameObject.tag == "BreakBlock") {
 			Destroy(gameObject);

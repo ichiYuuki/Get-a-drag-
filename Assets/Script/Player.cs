@@ -159,16 +159,16 @@ public class Player : MonoBehaviour {
 	}
 	
 	public void GameOver(){
-		//		gameOver = true;
+
 		Destroy (gameObject);
 		Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
-		//		gameOverText.enabled = true;
-		Debug.Log (canvas);
-		foreach (Transform child in canvas.transform){
-			if(child.name == "GameOver"){
-				child.gameObject.SetActive(true);
-			}
-		}
+//
+//		Debug.Log (canvas);
+//		foreach (Transform child in canvas.transform){
+//			if(child.name == "GameOver"){
+//				child.gameObject.SetActive(true);
+//			}
+//		}
 	}
 
 	void shot(GameObject obj){

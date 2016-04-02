@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float time = 120;
+    private float time = 30;
     private Explosion explosion;
     private GameObject gameEnd;
     private GameObject player;
@@ -32,6 +32,7 @@ public class Timer : MonoBehaviour
             time = 0;
             explosion.PlayerExplosion();
             gameEnd.SetActive(true);
+//			Destroy(player);
         }
         GetComponent<Text>().text = ((int)time).ToString();       
     }

@@ -15,17 +15,20 @@ public class Button : MonoBehaviour {
 	}
 
 	void Update(){
-		if (check) {
-			float toColor = this._Start.GetComponent<Image> ().color.a;
-			if (toColor < 0 || toColor > 1) {
-				_Step = _Step * -1;
+		if(Application.loadedLevelName == "MainTitle"){
+			if (check) {
+				float toColor = this._Start.GetComponent<Image> ().color.a;
+				if (toColor < 0 || toColor > 1) {
+					_Step = _Step * -1;
+				}
+				this._Start.GetComponent<Image> ().color = new Color (255, 255, 255, toColor + _Step);
 			}
-			this._Start.GetComponent<Image> ().color = new Color (255, 255, 255, toColor + _Step);
 		}
-
 	}
 	public void ButtonPushu(){
-		Application.LoadLevel("Title");
+		check = true;
+		Application.LoadLevel("MainTitle");
+		Debug.Log ("test");
 	}
 
 	public void GameStart(){

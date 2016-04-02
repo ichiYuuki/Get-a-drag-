@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float time = 3;
+    private float time = 30;
     private Explosion explosion;
     private GameObject gameEnd;
     private GameObject player;

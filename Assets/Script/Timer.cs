@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private float time = 120;
+    public float time = 50;
     private Explosion explosion;
     private GameObject gameEnd;
     private GameObject player;
@@ -27,12 +27,21 @@ public class Timer : MonoBehaviour
         //マイナスは表示しない
         if (time < 0)
         {
-            //ゲームオーバーになった時の処理
-            Debug.Log("ゲームオーバー");
+            //時間切れになった時の処理            
             time = 0;
             explosion.PlayerExplosion();
             gameEnd.SetActive(true);
         }
-        GetComponent<Text>().text = ((int)time).ToString();       
+        GetComponent<Text>().text = ((int)time).ToString();
+        PlayerDeth();
+    }
+
+    //プレイヤーがやられたらタイムをゼロにする
+    public void PlayerDeth()
+    {
+        if (player == null)
+        {
+            time = 0;
+        }
     }
 }

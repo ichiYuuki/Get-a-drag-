@@ -2,10 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Hp : MonoBehaviour
+public class HpBar : MonoBehaviour
 {
-
-    private Slider HpBar;
+    private Slider hpBar;
     private Player player;
     private GameObject unity;
     private int hp;
@@ -13,17 +12,16 @@ public class Hp : MonoBehaviour
     private Color color;
     void Start()
     {
-        HpBar = GameObject.Find("HpBar").GetComponent<Slider>();
+        hpBar = GameObject.Find("HpBar").GetComponent<Slider>();
         unity = GameObject.Find("UnityChan");
         player = unity.GetComponent<Player>();
-        color = GameObject.Find("Fill").GetComponent<Image>().color;
-             
+        color = GameObject.Find("Fill").GetComponent<Image>().color;            
     }
 
     void Update()
     {
         hp = player.hp;
-        HpBar.value = hp;
+        hpBar.value = hp;
         Debug.Log(hp);
         HpColor();
     }

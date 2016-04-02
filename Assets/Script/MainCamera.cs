@@ -5,6 +5,9 @@ public class MainCamera : MonoBehaviour {
 	public GameObject player;
 	public GameObject bossStage;
 	public float speed = 3f;
+	private bool bossBattleStart = false;
+	public GameObject Boss;
+	private bool bossStart = false;
 
 	private Transform playerTrans;
 	// Use this for initialization
@@ -16,8 +19,12 @@ public class MainCamera : MonoBehaviour {
 	void Update () {
 //		Debug.Log (GetComponent<Camera>().WorldToViewportPoint(Vector3.zero));
 		if (player) {
-			Target();
-			//bossステージ来たらifとboolか何かでBossBattle()に切り替え
+			if(!bossBattleStart){
+				Target();
+			}else{
+				BossBattle();
+			}
+
 		}
 	}
 
@@ -46,7 +53,14 @@ public class MainCamera : MonoBehaviour {
 	void BossBattle(){
 		if (transform.position.x < bossStage.transform.position.x) {
 			transform.position = transform.position + Vector3.right * speed * Time.deltaTime;
+		} else if(!bossStart){
+			Boss.GetComponent<BossEnemy> ().BattleStart ();
+			bossStart = true;
 		}
 		//カメラ遷移が終わったらボスの挙動スタート？
+	}
+
+	public void BattleStart(){
+		bossBattleStart = true;
 	}
 }

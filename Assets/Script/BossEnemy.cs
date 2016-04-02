@@ -21,10 +21,12 @@ public class BossEnemy : MonoBehaviour {
 	IEnumerator Start () {
 		pos = transform.position;
 
-//		while(!battleStart){
-//
-//			yield return new WaitForEndOfFrame();
-//		}
+		while(!battleStart){
+
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return new WaitForSeconds(1f);
 
 		while(true){
 			for(int i = 0; i < shotPoint.Length; i++){
@@ -82,5 +84,8 @@ public class BossEnemy : MonoBehaviour {
 		float rad = Mathf.Atan2(dy, dx);
 		return rad * Mathf.Rad2Deg;
 	}
-	
+
+	public void BattleStart(){
+		battleStart = true;
+	}
 }

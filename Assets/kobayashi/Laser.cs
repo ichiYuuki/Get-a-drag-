@@ -23,7 +23,7 @@ public class Laser : MonoBehaviour {
 		lineRenderer.enabled = false;
 //		player = GameObject.FindWithTag ("Player");
 		Vector2 pos = transform.position;
-		pos.y += 0.20f;
+//		pos.y += 0.20f;
 		transform.position = pos;
 //		transform.parent = player.transform;
 	}
@@ -37,7 +37,7 @@ public class Laser : MonoBehaviour {
 		}
 		
 		timerDelay += Time.deltaTime;
-		if(lineRenderer.enabled == true && timerDelay >= 0.02f && i < LaserWidth && timer < effectDisplayTime && destroy == false){
+		if(lineRenderer.enabled == true && timerDelay >= 0.04f && i < LaserWidth && timer < effectDisplayTime && destroy == false){
 			i += 0.05f;
 			showLine(i);
 			timerDelay = 0;
@@ -45,9 +45,9 @@ public class Laser : MonoBehaviour {
 
 		showLine (i);
 
-		if (timer >= effectDisplayTime + 0.3f && lineRenderer.enabled == true && destroy == false) {
+		if (timer >= effectDisplayTime && lineRenderer.enabled == true && destroy == false) {
 			timerDelay += Time.deltaTime;
-			if(timerDelay >= 0.02f ){
+			if(timerDelay >= 0.04f ){
 				i -= 0.05f;
 				showLine(i);
 				if(i <= 0.25f){
@@ -111,7 +111,7 @@ public class Laser : MonoBehaviour {
 
 	private void showLine(float wid){
 		lineRenderer.SetWidth (wid, wid);
-		lineRenderer.SetPosition (0, transform.position);
+		lineRenderer.SetPosition (0, transform.position + transform.up * 0.25f);
 		shotRay.origin = transform.position;
 		shotRay.direction = transform.up;
 		

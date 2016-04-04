@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 	public GameObject explosion;
 	public GameObject mainCamera;
 	public GameObject[] bullet = new GameObject[1];
-	private int bulletNum = 0;
+	public int bulletNum = 0;
 
 	//	public Life life;
 	public Death death;

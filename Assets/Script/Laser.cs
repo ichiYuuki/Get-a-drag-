@@ -21,6 +21,7 @@ public class Laser : MonoBehaviour {
 	void Start () {
 		beamParticle = GetComponent<ParticleSystem> ();
 		effectDisplayTime = beamParticle.duration + beamParticle.startLifetime;
+
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineRenderer.enabled = false;
 		player = GameObject.FindWithTag ("Buyer");
@@ -39,19 +40,17 @@ public class Laser : MonoBehaviour {
 		}
 		
 		timerDelay += Time.deltaTime;
-		if(lineRenderer.enabled == true && timerDelay >= 0.04f && i < LaserWidth && timer < effectDisplayTime && destroy == false){
+		if(lineRenderer.enabled == true && timerDelay >= 0.04f && i < LaserWidth && timer < effectDisplayTime - 1f && destroy == false){
 			i += 0.05f;
-			showLine(i);
+//			showLine(i);
 			timerDelay = 0;
 		}
 
-		showLine (i);
-
-		if (timer >= effectDisplayTime - 1f && lineRenderer.enabled == true && destroy == false) {
+		if (timer >= effectDisplayTime - 0.8f && destroy == false) {
 			timerDelay += Time.deltaTime;
 			if(timerDelay >= 0.04f ){
 				i -= 0.05f;
-				showLine(i);
+//				showLine(i);
 				if(i <= 0.25f){
 					lineRenderer.enabled = false;
 					lineRenderer.SetWidth (i, i);
@@ -60,6 +59,8 @@ public class Laser : MonoBehaviour {
 				timerDelay = 0;
 			}
 		}
+
+		showLine (i);
 
 		if (destroy == true ) {
 			lineRenderer.enabled = false;
@@ -71,39 +72,39 @@ public class Laser : MonoBehaviour {
 		}
 	}
 	
-	private void shot(){
-		timer = 0f;
-		beamParticle.Stop ();
-		beamParticle.Play ();
-		lineRenderer.enabled = true;
-		lineRenderer.SetWidth (i, i);
-		lineRenderer.SetPosition (0, transform.position);
-		shotRay.origin = transform.position;
-		shotRay.direction = transform.up;
-		
-		int layerMask = LayerMask.GetMask("Enemy");
-		shotHit = Physics2D.Raycast ((Vector2)shotRay.origin, (Vector2)shotRay.direction, range, layerMask);
-		if (shotHit.collider) {
-//			Destroy(shotHit.collider.gameObject);
-//			shotHit.collider.gameObject.GetComponent<Enemy>().Destroy();
-		}
-		layerMask = LayerMask.GetMask("Bullet");
-		shotHit = Physics2D.Raycast ((Vector2)shotRay.origin, (Vector2)shotRay.direction, range, layerMask);
-		if (shotHit.collider) {
-			//Destroy(shotHit.collider.gameObject);
-			Destroy(shotHit.collider.gameObject);
-		}
-
-//		if(Physics.Raycast(shotRay , out shotHit , range , layerMask)){
-//			// hit 
+//	private void shot(){
+//		timer = 0f;
+//		beamParticle.Stop ();
+//		beamParticle.Play ();
+//		lineRenderer.enabled = true;
+//		lineRenderer.SetWidth (i, i);
+//		lineRenderer.SetPosition (0, transform.position);
+//		shotRay.origin = transform.position;
+//		shotRay.direction = transform.up;
+//		
+//		int layerMask = LayerMask.GetMask("Enemy");
+//		shotHit = Physics2D.Raycast ((Vector2)shotRay.origin, (Vector2)shotRay.direction, range, layerMask);
+//		if (shotHit.collider) {
+////			Destroy(shotHit.collider.gameObject);
+////			shotHit.collider.gameObject.GetComponent<Enemy>().Destroy();
+//		}
+//		layerMask = LayerMask.GetMask("Bullet");
+//		shotHit = Physics2D.Raycast ((Vector2)shotRay.origin, (Vector2)shotRay.direction, range, layerMask);
+//		if (shotHit.collider) {
+//			//Destroy(shotHit.collider.gameObject);
 //			Destroy(shotHit.collider.gameObject);
 //		}
-
-		lineRenderer.SetPosition(1 , shotRay.origin + shotRay.direction * range);
-		
-		
-	}
-	
+//
+////		if(Physics.Raycast(shotRay , out shotHit , range , layerMask)){
+////			// hit 
+////			Destroy(shotHit.collider.gameObject);
+////		}
+//
+//		lineRenderer.SetPosition(1 , shotRay.origin + shotRay.direction * range);
+//		
+//		
+//	}
+//	
 
 //	private void disableEffect(){
 //		beamParticle.Stop ();
@@ -118,7 +119,7 @@ public class Laser : MonoBehaviour {
 		lineRenderer.SetWidth (wid, wid);
 		lineRenderer.SetPosition (0, transform.position + transform.right * 0.25f);
 		shotRay.origin = transform.position;
-		shotRay.direction = Vector3.right;
+		shotRay.direction = transform.right * player.transform.localScale.x;
 		
 		int layerMask = LayerMask.GetMask("Enemy");
 		shotHit = Physics2D.Raycast ((Vector2)shotRay.origin, (Vector2)shotRay.direction, range, layerMask);

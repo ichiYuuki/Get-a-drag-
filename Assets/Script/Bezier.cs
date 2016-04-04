@@ -18,11 +18,18 @@ public class Bezier : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag("Buyer");
-		enemy = GameObject.FindWithTag("Enemy");
 		p0 = player.transform.position;
 		p1 = p0 + p1;
-		p2 = p0 + p2;
-		p3 = enemy.transform.position;
+		if (GameObject.FindWithTag ("Enemy")) {
+			enemy = GameObject.FindWithTag ("Enemy");
+			p2 = p0 + p2;
+			p3 = enemy.transform.position;
+		} else {
+			p2 = p0 + new Vector2 (p2.x * player.transform.localScale.x, p2.y);
+			p3 = p0 + new Vector2(10 * player.transform.localScale.x ,1);
+		}
+
+
 	}
 	
 	// Update is called once per frame

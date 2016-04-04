@@ -173,6 +173,6 @@ public class Player : MonoBehaviour {
 	}
 
 	void shot(GameObject obj){
-		Instantiate (obj, transform.position + new Vector3 (0f, 1.0f, 0f), transform.rotation);
+		Instantiate (obj, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
 	}
 }

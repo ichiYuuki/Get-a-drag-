@@ -88,4 +88,9 @@ public class Enemy1 : MonoBehaviour {
 		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
 		Instantiate (bullet, transform.position, transform.rotation);
 	}
+
+	public void DestroyEnemy(){
+		Destroy (gameObject);
+		Instantiate (explosion, transform.position, transform.rotation);
+	}
 }

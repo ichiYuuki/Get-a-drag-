@@ -88,4 +88,9 @@ public class BossEnemy : MonoBehaviour {
 	public void BattleStart(){
 		battleStart = true;
 	}
+
+	public void DestroyEnemy(){
+		Destroy (gameObject);
+		Instantiate (explosion, transform.position, transform.rotation);
+	}
 }

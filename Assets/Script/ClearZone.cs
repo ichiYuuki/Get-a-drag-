@@ -21,6 +21,7 @@ public class ClearZone : MonoBehaviour {
 		if (col.tag == "Buyer") {
 			gameClear = true;
 		}
+		Debug.Log ("クリア");
 	}
 
 //	void CallTitle(){

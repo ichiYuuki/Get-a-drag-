@@ -58,6 +58,9 @@ public class Enemy1 : MonoBehaviour {
 					Destroy(gameObject);
 					Instantiate(explosion, transform.position, transform.rotation);
 				}
+				if(col.tag == "DestroyArea"){
+					Destroy(gameObject);
+				}
 
 //				if(Random.Range(0,4) == 0){
 //					Instantiate(item, transform.position, transform.rotation);

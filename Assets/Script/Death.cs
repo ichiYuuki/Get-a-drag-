@@ -2,12 +2,22 @@
 using System.Collections;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Death : MonoBehaviour {
 
-	public GameObject explosion;
+	private Explosion explosion;
+	private GameObject gameEnd;
+	private GameObject player;
 
-	public void Explosion(){
-		Instantiate(explosion,transform.position + new Vector3(0,1,0),transform.rotation);
+	void Start(){
+		gameEnd = GameObject.Find("GameEnd");
+		player = GameObject.Find("UnityChan");
+		explosion = GetComponent<Explosion>();
+	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		if (col.gameObject.tag == "Buyer") {
+			explosion.PlayerExplosion();
+
+		}
 	}
 }

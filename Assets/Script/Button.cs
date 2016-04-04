@@ -8,6 +8,8 @@ public class Button : MonoBehaviour {
 	private GameObject _Start;
 	private float _Step = 0.05f;
 	private bool check;
+
+	private AudioSource[] scorce;
 	void Start(){
 		this._Start = GameObject.Find ("Button");
 		check = false;
@@ -22,6 +24,7 @@ public class Button : MonoBehaviour {
 					_Step = _Step * -1;
 				}
 				this._Start.GetComponent<Image> ().color = new Color (255, 255, 255, toColor + _Step);
+				Debug.Log("プッシュされたよ！");
 			}
 		}
 	}
@@ -42,9 +45,16 @@ public class Button : MonoBehaviour {
 		Debug.Log ("result");
 	}
 
+	public void musicrand(){
+		for(int i = 0; i >= scorce.Length; i++){
+
+		}
+	}
+
 	IEnumerator change(){
 		yield return new WaitForSeconds(4);
 //		Application.LoadLevel("MainStage1");
 		Application.LoadLevel("BondStage");
+//		Application.LoadLevel("Description");
 	}
 }

@@ -7,7 +7,7 @@ using System;
 public class Bullet : MonoBehaviour {
 
 	private GameObject player;
-	private int speed = 10;
+	public int speed = 10;
 	public int power = 2;
 
 	void Start () {

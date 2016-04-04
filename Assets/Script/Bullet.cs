@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
 	private GameObject player;
 	public int speed = 10;
 	public int power = 2;
+	public float live = 5f;
 
 	void Start () {
 		player = GameObject.FindWithTag ("Buyer");
@@ -17,7 +18,7 @@ public class Bullet : MonoBehaviour {
 		Vector2 temp = transform.localScale;
 		temp.x = player.transform.localScale.x;
 		transform.localScale = temp;
-		Destroy (gameObject, 5);
+		Destroy (gameObject, live);
 	}
 
 	void OnTriggerEnter2D(Collider2D col){

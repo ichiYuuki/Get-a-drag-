@@ -16,6 +16,7 @@ public class BossEnemy : MonoBehaviour {
 	public int num = 0;
 	float time = 0;
 	Vector3 pos;
+	bool canHit = false;
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -26,6 +27,7 @@ public class BossEnemy : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 
+		canHit = true;
 		yield return new WaitForSeconds(1f);
 
 		while(true){
@@ -68,12 +70,14 @@ public class BossEnemy : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if(col.tag == "Bullet" && col.gameObject.name == "Bullet(Clone)"){
-			int bulletPower = col.gameObject.GetComponent<Bullet>().power;
-			hp -= bulletPower;
-			if(hp <= 0){
-				Destroy(gameObject);
-				Instantiate(explosion, transform.position, transform.rotation);
+		if (canHit){
+			if (col.tag == "Bullet") {
+				int bulletPower = col.gameObject.GetComponent<Bullet> ().power;
+				hp -= bulletPower;
+				if (hp <= 0) {
+					Destroy (gameObject);
+					Instantiate (explosion, transform.position, transform.rotation);
+				}
 			}
 		}
 	}

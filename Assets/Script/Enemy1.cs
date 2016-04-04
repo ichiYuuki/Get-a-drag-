@@ -51,7 +51,7 @@ public class Enemy1 : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D col){
 		if(_isRendered){
-			if(col.tag == "Bullet" && col.gameObject.name == "Bullet(Clone)"){
+			if(col.tag == "Bullet"){
 				int bulletPower = col.gameObject.GetComponent<Bullet>().power;
 				hp -= bulletPower;
 				if(hp <= 0){

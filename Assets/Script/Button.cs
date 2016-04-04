@@ -38,12 +38,12 @@ public class Button : MonoBehaviour {
 	}
 
 	public void GameStart(){
+		if(!check){
+			int x = UnityEngine.Random.Range (0, seScorce.Length);
+			seScorce [x].Play ();
+		}
 		check = true;
 		StartCoroutine("change");
-
-		int x = UnityEngine.Random.Range (0, seScorce.Length);
-		seScorce [x].Play ();
-	
 	}
 	public void highScre(){
 		Debug.Log ("result");
@@ -59,7 +59,7 @@ public class Button : MonoBehaviour {
 		
 	}
 	IEnumerator change(){
-		yield return new WaitForSeconds(40);
+		yield return new WaitForSeconds(5);
 //		Application.LoadLevel("MainStage1");
 		Application.LoadLevel("BondStage");
 //		Application.LoadLevel("Description");

@@ -6,19 +6,17 @@ public class InvincibleTime : MonoBehaviour
 {
     private GameObject player;
     private Renderer re;
-
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("UnityChan");
         re = player.GetComponent<Renderer>();
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -30,10 +28,19 @@ public class InvincibleTime : MonoBehaviour
         }
     }
 
-    IEnumerator Damage()
+    //Enemyの弾に当たった時
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            StartCoroutine("Damage");
+        }
+    }
+
+    public IEnumerator Damage()
     {
         //レイヤーをPlayerDamageに変更
-        gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+        player.layer = LayerMask.NameToLayer("PlayerDamage");
         //while文を10回ループ
         int count = 10;
 
@@ -50,6 +57,6 @@ public class InvincibleTime : MonoBehaviour
             count--;
         }
         //レイヤーをPlayerに戻す
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        player.layer = LayerMask.NameToLayer("Player");
     }
 }

@@ -10,23 +10,27 @@ public class Stopwatch : MonoBehaviour {
 	public static float DecCount;
 	public static int MinCount;
 	public static int SecCount;
-
+	public GameObject player;
 	void Start () {
 		//シーンごとにタイムリセットに必要
 		DecCount = 0;
 		MinCount = 0;
 		SecCount = 0;
+		player = GameObject.Find ("UnityChan");
 	}
 
 	void Update () {
 		Text Min = GameObject.Find ("Min").GetComponent<Text> ();
 		Text Sec = GameObject.Find ("Sec").GetComponent<Text> ();
 		Text Decimal = GameObject.Find ("Decimal").GetComponent<Text> ();
+
 		//ゲームクリアしてなければカウントアップ
-		if (ClearZone.gameClear == false) {
-			timeCount += 1.0f * Time.deltaTime;
-			DecCount = timeCount * 100;
-		}
+		if (player == true) {
+			if (ClearZone.gameClear == false) {
+				timeCount += 1.0f * Time.deltaTime;
+				DecCount = timeCount * 100;
+			}
+		} 
 		if (timeCount >= 0.96) {
 			timeCount = 0;
 			SecCount = SecCount + 1;

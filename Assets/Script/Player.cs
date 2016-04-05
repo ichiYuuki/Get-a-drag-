@@ -69,12 +69,12 @@ public class Player : MonoBehaviour {
 				GetComponent<AudioSource>().Play();
 			}
 
-//			if(なんかのボタン押されたらのif文){
-//				bulletNum += 1;
-//				if(bulletNum >= bullet.Length){
-//					bulletNum = 0;
-//				}
-//			}
+			if(Input.GetKeyDown ("x")){
+				bulletNum += 1;
+				if(bulletNum >= bullet.Length){
+					bulletNum = 0;
+				}
+			}
 
 		}
 	}

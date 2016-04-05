@@ -34,12 +34,13 @@ public class BossEnemy : MonoBehaviour {
 			for(int i = 0; i < shotPoint.Length; i++){
 				shot (bullet, shotPoint[i].transform);
 			}
+			if(GameObject.FindWithTag("Buyer")){
+				for(int i = 0; i < homingShot.Length; i++){
+					homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, target.transform.position));
 
-			for(int i = 0; i < homingShot.Length; i++){
-				homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, target.transform.position));
-
-				shot (bullet, homingShot[i].transform);
-				homingShot[i].transform.eulerAngles = Vector3.zero;
+					shot (bullet, homingShot[i].transform);
+					homingShot[i].transform.eulerAngles = Vector3.zero;
+				}
 			}
 
 			yield return new WaitForSeconds(shotDelay);
@@ -94,7 +95,9 @@ public class BossEnemy : MonoBehaviour {
 	}
 
 	public void DestroyEnemy(){
-		Destroy (gameObject);
-		Instantiate (explosion, transform.position, transform.rotation);
+		if (canHit) {
+			Destroy (gameObject);
+			Instantiate (explosion, transform.position, transform.rotation);
+		}
 	}
 }

@@ -90,7 +90,9 @@ public class Enemy1 : MonoBehaviour {
 	}
 
 	public void DestroyEnemy(){
-		Destroy (gameObject);
-		Instantiate (explosion, transform.position, transform.rotation);
+		if (_isRendered) {
+			Destroy (gameObject);
+			Instantiate (explosion, transform.position, transform.rotation);
+		}
 	}
 }

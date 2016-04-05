@@ -25,6 +25,7 @@ public class Laser : MonoBehaviour {
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineRenderer.enabled = false;
 		player = GameObject.FindWithTag ("Buyer");
+		player.GetComponent<Player> ().CanShotLaser (false);
 		transform.parent = player.transform;
 //		Vector2 pos = transform.right * player.transform.localScale.x;
 //		pos.y += 0.20f;
@@ -68,6 +69,7 @@ public class Laser : MonoBehaviour {
 		}
 
 		if(timer >= effectDisplayTime){
+			player.GetComponent<Player> ().CanShotLaser (true);
 			Destroy(this.gameObject);
 		}
 	}

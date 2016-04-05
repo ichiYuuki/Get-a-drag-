@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject[] bullet = new GameObject[1];
 	public int bulletNum = 0;
+	bool canLaser = true;
 
 	//	public Life life;
 	public Death death;
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour {
 			anim.SetBool ("isFalling", isFalling);
 			
 //			if(!gameClear){
-			if (Input.GetKeyDown ("z")) {
+			if (Input.GetKeyDown ("z") && canLaser) {
 				anim.SetTrigger ("Shot");
 				shot (bullet[bulletNum]);
 				GetComponent<AudioSource>().Play();
@@ -173,6 +174,10 @@ public class Player : MonoBehaviour {
 	}
 
 	void shot(GameObject obj){
-		Instantiate (obj, transform.position + new Vector3 (0f, 1.2f, 0f), transform.rotation);
+		Instantiate (obj, transform.position + transform.up + transform.right * transform.localScale.x, transform.rotation);
+	}
+
+	public void CanShotLaser(bool bo){
+		canLaser = bo;
 	}
 }

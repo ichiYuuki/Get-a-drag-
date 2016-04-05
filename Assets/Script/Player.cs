@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
 		energy = GetComponent<Energy>();
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
+//		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
 	}
 	
 	void Update(){
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour {
 				if(bulletNum >= bullet.Length){
 					bulletNum = 0;
 				}
+//				GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
 			}
 
 		}
@@ -180,4 +182,5 @@ public class Player : MonoBehaviour {
 	public void CanShotLaser(bool bo){
 		canLaser = bo;
 	}
+
 }

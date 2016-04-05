@@ -12,14 +12,14 @@ public class Bezier : MonoBehaviour {
 	GameObject[] enemys;
 	
 	public int power = 2;
-	float speed = 2;
+	float speed = 3;
 	
 	float time = 0;
 	
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag("Buyer");
-		p0 = player.transform.position;
+		p0 = transform.position;
 		p1 = p0 + p1;
 		if (GameObject.FindWithTag ("Enemy")) {
 //			enemy = GameObject.FindWithTag ("Enemy");
@@ -39,6 +39,7 @@ public class Bezier : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		time += Time.deltaTime;
 		
 		Vector2 m0 = Cal (p0,p1,time);

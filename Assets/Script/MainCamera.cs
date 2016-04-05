@@ -8,16 +8,18 @@ public class MainCamera : MonoBehaviour {
 	private bool bossBattleStart = false;
 	public GameObject Boss;
 	private bool bossStart = false;
+	public GameObject startPoint;
+	private float center;
 
 	private Transform playerTrans;
 	// Use this for initialization
 	void Start () {
 		playerTrans = player.GetComponent<Transform>();
+		center = GetComponent<Camera> ().ScreenToWorldPoint (new Vector3 (Screen.width / 2, 0f, 0f)).x - GetComponent<Camera> ().ScreenToWorldPoint (Vector3.zero).x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-//		Debug.Log (GetComponent<Camera>().WorldToViewportPoint(Vector3.zero));
 		if (player) {
 			if(!bossBattleStart){
 				Target();
@@ -30,8 +32,9 @@ public class MainCamera : MonoBehaviour {
 
 	void Target(){
 		transform.position = new Vector3 (player.transform.position.x, 5,-10);
-		if (transform.position.x < -2) {
-			transform.position = new Vector3(-2, 5, -10);
+		if (transform.position.x < startPoint.transform.position.x + center) {
+
+			transform.position = new Vector3(startPoint.transform.position.x + center, 5, -10);
 		}
 		if (transform.position.x >= 100) {
 			transform.position = new Vector3(100, 5, -10);

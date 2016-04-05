@@ -9,6 +9,7 @@ public class Bezier : MonoBehaviour {
 
 	GameObject player;
 	GameObject enemy;
+	GameObject[] enemys;
 	
 	public int power = 2;
 	float speed = 2;
@@ -21,15 +22,19 @@ public class Bezier : MonoBehaviour {
 		p0 = player.transform.position;
 		p1 = p0 + p1;
 		if (GameObject.FindWithTag ("Enemy")) {
-			enemy = GameObject.FindWithTag ("Enemy");
+//			enemy = GameObject.FindWithTag ("Enemy");
+			enemys = GameObject.FindGameObjectsWithTag ("Enemy");
+			for(int i = 0; i < enemys.Length; i++){
+				if(i == 0 || Vector2.Distance(p0, enemy.transform.position ) >= Vector2.Distance(p0,enemys[i].transform.position)){
+					enemy = enemys[i];
+				}
+			}
 			p2 = p0 + p2;
 			p3 = enemy.transform.position;
 		} else {
 			p2 = p0 + new Vector2 (p2.x * player.transform.localScale.x, p2.y);
 			p3 = p0 + new Vector2(10 * player.transform.localScale.x ,1);
 		}
-
-
 	}
 	
 	// Update is called once per frame

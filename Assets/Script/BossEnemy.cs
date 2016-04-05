@@ -22,6 +22,7 @@ public class BossEnemy : MonoBehaviour {
 	IEnumerator Start () {
 		pos = transform.position;
 
+
 		while(!battleStart){
 
 			yield return new WaitForEndOfFrame();
@@ -34,12 +35,14 @@ public class BossEnemy : MonoBehaviour {
 			for(int i = 0; i < shotPoint.Length; i++){
 				shot (bullet, shotPoint[i].transform);
 			}
+
+			yield return new WaitForSeconds(shotDelay);
+
 			if(GameObject.FindWithTag("Buyer")){
 				for(int i = 0; i < homingShot.Length; i++){
 					homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, target.transform.position));
 
 					shot (bullet, homingShot[i].transform);
-					homingShot[i].transform.eulerAngles = Vector3.zero;
 				}
 			}
 

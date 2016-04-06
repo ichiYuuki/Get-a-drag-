@@ -19,18 +19,26 @@ public class Enemy1 : MonoBehaviour {
 	public float shotDelay = 1f;
 	public bool canShot = false;
 	private bool shotbool = false;
+	private Transform enemyTf;
+	public bool canHoming = false;
+	GameObject player;
 
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
+		player = GameObject.FindWithTag("Buyer");
 
 		while(shotbool == false){
 
 			yield return new WaitForEndOfFrame();
 		}
 
-		while (canShot == true) {
-			Shot ();
-			
+		while (canShot) {
+			if(canHoming){
+				Vector3 ev = new Vector3(0f,0f,Homing(transform.position, player.transform.position));
+				Shot(ev);
+			}else{
+				Shot ();
+			}
 			yield return new WaitForSeconds (shotDelay);
 		}
 
@@ -86,7 +94,14 @@ public class Enemy1 : MonoBehaviour {
 	void Shot(){
 //		AudioSource.Play();
 		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
-		Instantiate (bullet, transform.position, transform.rotation);
+		Instantiate (bullet, transform.position, transform.rotation );
+	}
+
+
+	void Shot(Vector3 v){
+//		AudioSource.Play();
+		bullet.GetComponent<EnemyBullet> ().power = attackPoint;
+		Instantiate (bullet, transform.position, Quaternion.Euler(v.x, v.y, v.z));
 	}
 
 	public void DestroyEnemy(){
@@ -95,4 +110,12 @@ public class Enemy1 : MonoBehaviour {
 			Instantiate (explosion, transform.position, transform.rotation);
 		}
 	}
+
+	float Homing(Vector3 p1, Vector3 p2){
+		float dx = p1.x - p2.x;
+		float dy = p1.y - (p2.y + 0.5f);
+		float rad = Mathf.Atan2(dy, dx);
+		return rad * Mathf.Rad2Deg;
+	}
+
 }

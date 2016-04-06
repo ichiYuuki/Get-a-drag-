@@ -6,6 +6,8 @@ public class InvincibleTime : MonoBehaviour
 {
     private GameObject player;
     private Renderer re;
+    public Player classPlayer;
+    public EnemyBullet enemyBullet;
     // Use this for initialization
     void Start()
     {
@@ -24,6 +26,7 @@ public class InvincibleTime : MonoBehaviour
         //Enemyとぶつかった時にコルーチンを実行
         if (col.gameObject.tag == "Enemy")
         {
+            classPlayer.hp -= 1;
             StartCoroutine("Damage");
         }
     }
@@ -33,12 +36,12 @@ public class InvincibleTime : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
+            classPlayer.hp -= enemyBullet.power;
             StartCoroutine("Damage");
         }
     }
 
-    public IEnumerator Damage()
-    {
+    public IEnumerator Damage() {         
         //レイヤーをPlayerDamageに変更
         player.layer = LayerMask.NameToLayer("PlayerDamage");
         //while文を10回ループ

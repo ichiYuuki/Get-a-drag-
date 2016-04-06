@@ -21,7 +21,7 @@ public class Bezier : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindWithTag("Buyer");
+		player = GameObject.FindWithTag ("Buyer");
 		p0 = transform.position;
 		p1 = p0 + p1;
 		if (GameObject.FindWithTag ("Enemy")) {

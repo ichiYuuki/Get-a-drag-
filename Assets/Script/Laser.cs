@@ -21,7 +21,6 @@ public class Laser : MonoBehaviour {
 	void Start () {
 		beamParticle = GetComponent<ParticleSystem> ();
 		effectDisplayTime = beamParticle.duration + beamParticle.startLifetime;
-
 		lineRenderer = GetComponent<LineRenderer> ();
 		lineRenderer.enabled = false;
 		player = GameObject.FindWithTag ("Buyer");

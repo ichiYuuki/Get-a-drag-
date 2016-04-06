@@ -10,7 +10,7 @@ public class BossEnemy : MonoBehaviour {
 	public GameObject bullet;
 	public GameObject[] shotPoint;
 	public GameObject[] homingShot;
-	public GameObject target;
+	public GameObject player;
 	public GameObject explosion;
 	public bool canMove = false;
 	public int num = 0;
@@ -20,6 +20,8 @@ public class BossEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
+		player = GameObject.FindWithTag ("Buyer");
+
 		pos = transform.position;
 
 
@@ -40,7 +42,7 @@ public class BossEnemy : MonoBehaviour {
 
 			if(GameObject.FindWithTag("Buyer")){
 				for(int i = 0; i < homingShot.Length; i++){
-					homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, target.transform.position));
+					homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, player.transform.position));
 
 					shot (bullet, homingShot[i].transform);
 				}

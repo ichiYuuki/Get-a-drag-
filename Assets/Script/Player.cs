@@ -121,7 +121,8 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 		if (!gameClear) {
 			if (col.gameObject.tag == "Enemy") {
-				hp -= 1;
+                //hp -= 1;
+                Debug.Log("衝突");
 				if(hp > 0){
 					return;
 				}

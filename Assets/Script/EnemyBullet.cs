@@ -23,7 +23,7 @@ public class EnemyBullet : MonoBehaviour {
 		if (col.gameObject.tag == "Buyer") {
 			Destroy(gameObject);
 			int hp = col.gameObject.GetComponent<Player>().hp;
-			hp  -= power;
+			//hp  -= power;
 			if(hp <= 0){
                 player = GameObject.Find("UnityChan");                
                 Destroy(player);               

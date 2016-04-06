@@ -15,6 +15,9 @@ public class Bezier : MonoBehaviour {
 	float speed = 3;
 	
 	float time = 0;
+
+	private int enemyLayer = 11;
+	private int bossLayer = 18;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,10 @@ public class Bezier : MonoBehaviour {
 //			enemy = GameObject.FindWithTag ("Enemy");
 			enemys = GameObject.FindGameObjectsWithTag ("Enemy");
 			for(int i = 0; i < enemys.Length; i++){
-				if(i == 0 || Vector2.Distance(p0, enemy.transform.position ) >= Vector2.Distance(p0,enemys[i].transform.position)){
-					enemy = enemys[i];
+				if(enemys[i].layer == enemyLayer || enemys[i].layer == bossLayer){
+					if(i == 0 || Vector2.Distance(p0, enemy.transform.position ) >= Vector2.Distance(p0,enemys[i].transform.position)){
+						enemy = enemys[i];
+					}
 				}
 			}
 			p2 = p0 + p2;

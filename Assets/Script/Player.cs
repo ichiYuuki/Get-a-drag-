@@ -15,7 +15,11 @@ public class Player : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject[] bullet = new GameObject[1];
 	public int bulletNum = 0;
+	public GameObject laser;
 	bool canLaser = true;
+	int laserCount = 1;
+	public GameObject chargeEffect;
+	private float chargeTime = 0; 
 
 	//	public Life life;
 	public Death death;
@@ -69,6 +73,21 @@ public class Player : MonoBehaviour {
 				anim.SetTrigger ("Shot");
 				shot (bullet[bulletNum]);
 				GetComponent<AudioSource>().Play();
+			}
+
+			if(Input.GetKey ("z")){
+				chargeTime += Time.deltaTime;
+				if(chargeTime >= 2f && laserCount > 0 && !GameObject.Find("ChargeEffect(Clone)")){
+					Instantiate(chargeEffect,transform.position + new Vector3(0f,0.8f,0f),transform.rotation);
+				}
+			}
+			
+			if(Input.GetKeyUp ("z")){
+				if(chargeTime >= 2f && laserCount > 0){
+					shot (laser);
+					laserCount -= 1;
+				}
+				chargeTime = 0;
 			}
 
 			if(Input.GetKeyDown ("x")){

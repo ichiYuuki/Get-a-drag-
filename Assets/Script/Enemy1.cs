@@ -25,7 +25,7 @@ public class Enemy1 : MonoBehaviour {
 
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
-		player = GameObject.FindWithTag("Buyer");
+		player = GameObject.FindWithTag ("Buyer");
 
 		while(shotbool == false){
 

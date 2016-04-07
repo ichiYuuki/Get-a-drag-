@@ -83,7 +83,7 @@ public class GameResult : MonoBehaviour {
 				}
 			}
 		}
-				PlayerPrefs.DeleteAll();//データ初期化
+//				PlayerPrefs.DeleteAll();//データ初期化
 //				Debug.Log(Application.loadedLevelName);
 //				Debug.Log (PlayerPrefs.GetInt ("HighScre00"));
 	}

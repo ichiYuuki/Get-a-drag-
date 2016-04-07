@@ -9,6 +9,7 @@ public class Bezier : MonoBehaviour {
 
 	GameObject player;
 	GameObject enemy;
+	Vector3 enemyPos;
 	GameObject[] enemys;
 	
 	public int power = 2;
@@ -34,6 +35,7 @@ public class Bezier : MonoBehaviour {
 					}
 				}
 			}
+
 			p2 = p0 + p2;
 			p3 = enemy.transform.position;
 		} else {

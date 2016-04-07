@@ -14,7 +14,10 @@ public class BossStage : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter2D(){
-		Camera.GetComponent<MainCamera> ().BattleStart();
+	void OnTriggerEnter2D(Collider2D c){
+		if(c.gameObject.tag == "Buyer"){
+			Camera.GetComponent<MainCamera> ().BattleStart();
+		}
+
 	}
 }

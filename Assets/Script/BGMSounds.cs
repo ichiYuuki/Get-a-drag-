@@ -12,20 +12,19 @@ public class BGMSounds : MonoBehaviour {
 
 
 		if(Application.loadedLevelName == "MainStage1"){
-			Debug.Log("ステージ1");
+//			Debug.Log("ステージ1");
 			audioScurce1.clip = bgmClip1; 
 			audioScurce1.Play();
 		}
 		if(Application.loadedLevelName == "MainStage2"){
 			audioScurce2.clip = bgmClip2; 
 			audioScurce2.Play();
-			Debug.Log("ステージ2");
+//			Debug.Log("ステージ2");
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Stage によって曲を変える
 
 	}
 }

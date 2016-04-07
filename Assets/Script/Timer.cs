@@ -21,9 +21,11 @@ public class Timer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //1秒に1ずつ減らしていく
-        time -= Time.deltaTime;
+	{	//ClearZoneのgameClear　と　Stopwatchのclear　がfalse のとき
+		if(ClearZone.gameClear == false && Stopwatch.clear == false){
+	        //1秒に1ずつ減らしていく
+	        time -= Time.deltaTime;
+		}
         //マイナスは表示しない
         if (time < 0)
         {

@@ -16,6 +16,7 @@ public class GameResult : MonoBehaviour {
 	
 	void Start () {
 		Boss = GameObject.Find ("BossHone");
+		ClearZone.gameClear = false;
 		if(Application.loadedLevelName == "MainStage1"){
 			if (PlayerPrefs.HasKey ("HighScre_01")) {
 				highScre01 = PlayerPrefs.GetFloat ("HighScre_01");
@@ -26,7 +27,7 @@ public class GameResult : MonoBehaviour {
 
 		if(Application.loadedLevelName == "MainStage2"){
 			if (PlayerPrefs.HasKey ("HighScre_02")) {
-				highScre02 = PlayerPrefs.GetFloat ("HighScre_01");
+				highScre02 = PlayerPrefs.GetFloat ("HighScre_02");
 			} else {
 				highScre02 = 5999;
 			} 
@@ -45,7 +46,8 @@ public class GameResult : MonoBehaviour {
 	
 	
 	void Update () {
-		if (ClearZone.gameClear == true || Boss == null) {
+		Debug.Log (ClearZone.gameClear);
+		if (ClearZone.gameClear == true || Stopwatch.clear == true) {
 			parts.SetActive(true);
 			float Min = Mathf.FloorToInt(Stopwatch.MinCount);
 			float Sec = Mathf.FloorToInt(Stopwatch.SecCount);

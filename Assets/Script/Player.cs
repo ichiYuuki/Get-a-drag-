@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
 	int laserCount = 1;
 	public GameObject chargeEffect;
 	private float chargeTime = 0; 
-	public GameObject boss;
 
 	//	public Life life;
 	public Death death;
@@ -45,7 +44,7 @@ public class Player : MonoBehaviour {
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
 		ending = false;
-		boss = GameObject.Find ("BossHone");
+
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
 //		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
@@ -57,7 +56,7 @@ public class Player : MonoBehaviour {
 			transform.position - transform.up * 0.07f,
 			groundLayer);
 		
-		if (!gameClear) {
+		if (!gameClear && !Stopwatch.clear) {
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
 					anim.SetBool ("Dash", false);
@@ -84,7 +83,7 @@ public class Player : MonoBehaviour {
 				if(chargeTime >= 2f && laserCount > 0 && !GameObject.Find("ChargeEffect(Clone)")){
 					Instantiate(chargeEffect,transform.position + new Vector3(0f,0.8f,0f),transform.rotation);
 					ending =true;
-					Debug.Log(ending);
+//					Debug.Log(ending);
 				}
 			}
 			
@@ -103,15 +102,13 @@ public class Player : MonoBehaviour {
 				}
 //				GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
 			}
-			if(boss == null){
-				gameClear =true;
-			}
+
 
 		}
 	}
 	
 	void FixedUpdate () {
-		if (!gameClear) {
+		if (!gameClear && !Stopwatch.clear) {
 			float x = Input.GetAxisRaw ("Horizontal");
 			MoveLimit();
 			if (x != 0) {

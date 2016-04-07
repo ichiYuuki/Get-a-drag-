@@ -17,13 +17,13 @@ public class BossEnemy : MonoBehaviour {
 	float time = 0;
 	Vector3 pos;
 	bool canHit = false;
+	
 
 	// Use this for initialization
 	IEnumerator Start () {
 		player = GameObject.FindWithTag ("Buyer");
 
 		pos = transform.position;
-
 
 		while(!battleStart){
 
@@ -83,6 +83,7 @@ public class BossEnemy : MonoBehaviour {
 				if (hp <= 0) {
 					Destroy (gameObject);
 					Instantiate (explosion, transform.position, transform.rotation);
+
 				}
 			}
 		}

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 	int laserCount = 1;
 	public GameObject chargeEffect;
 	private float chargeTime = 0; 
+	public GameObject boss;
 
 	//	public Life life;
 	public Death death;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour {
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
 		ending = false;
+		boss = GameObject.Find ("BossHone");
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
 //		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
@@ -100,6 +102,9 @@ public class Player : MonoBehaviour {
 					bulletNum = 0;
 				}
 //				GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
+			}
+			if(boss == null){
+				gameClear =true;
 			}
 
 		}

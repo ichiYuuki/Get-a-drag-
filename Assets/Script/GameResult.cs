@@ -12,8 +12,10 @@ public class GameResult : MonoBehaviour {
 	public Text clearTime;
 	public Text bestTime;
 	public GameObject parts;
+	public GameObject Boss;
 	
 	void Start () {
+		Boss = GameObject.Find ("BossHone");
 		if(Application.loadedLevelName == "MainStage1"){
 			if (PlayerPrefs.HasKey ("HighScre_01")) {
 				highScre01 = PlayerPrefs.GetFloat ("HighScre_01");
@@ -43,7 +45,7 @@ public class GameResult : MonoBehaviour {
 	
 	
 	void Update () {
-		if (ClearZone.gameClear == true) {
+		if (ClearZone.gameClear == true || Boss == null) {
 			parts.SetActive(true);
 			float Min = Mathf.FloorToInt(Stopwatch.MinCount);
 			float Sec = Mathf.FloorToInt(Stopwatch.SecCount);

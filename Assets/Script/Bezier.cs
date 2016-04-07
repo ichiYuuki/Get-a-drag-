@@ -9,7 +9,6 @@ public class Bezier : MonoBehaviour {
 
 	GameObject player;
 	GameObject enemy;
-	Vector3 enemyPos;
 	GameObject[] enemys;
 	
 	public int power = 2;
@@ -19,10 +18,19 @@ public class Bezier : MonoBehaviour {
 
 	private int enemyLayer = 11;
 	private int bossLayer = 18;
+	private bool straight = false;
+	private Camera mCamera;
+	private float drc = 0;
+
+	private Vector2 b;
 	
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag ("Buyer");
+		drc = player.transform.localScale.x;
+		mCamera = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
+		Vector2 leftbottom = mCamera.ScreenToWorldPoint (Vector2.zero);
+		Vector2 righttop = mCamera.ScreenToWorldPoint (new Vector2(Screen.width, Screen.height));
 		p0 = transform.position;
 		p1 = p0 + p1;
 		if (GameObject.FindWithTag ("Enemy")) {
@@ -36,30 +44,40 @@ public class Bezier : MonoBehaviour {
 				}
 			}
 
+
+			if(enemy.transform.position.x > righttop.x || enemy.transform.position.y > righttop.y
+			   || enemy.transform.position.x < leftbottom.x || enemy.transform.position.x < leftbottom.y ){
+				straight = true;
+			}
+
 			p2 = p0 + p2;
 			p3 = enemy.transform.position;
 		} else {
-			p2 = p0 + new Vector2 (p2.x * player.transform.localScale.x, p2.y);
-			p3 = p0 + new Vector2(10 * player.transform.localScale.x ,1);
+//			p2 = p0 + new Vector2 (p2.x * player.transform.localScale.x, p2.y);
+//			p3 = p0 + new Vector2(10 * player.transform.localScale.x ,1);
+			straight = true;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		time += Time.deltaTime;
-		
-		Vector2 m0 = Cal (p0,p1,time);
-		Vector2 m1 = Cal (p1,p2,time);
-		Vector2 m2 = Cal (p2,p3,time);
-		
-		Vector2 b0 = Cal (m0, m1, time);
-		Vector2 b1 = Cal (m1, m2, time);
-		
-		Vector2 b = Cal(b0,b1,time);
-		
-		transform.position = b;
 
+		if (straight) {
+
+			b = p0 + Vector2.right * time  * 10f * speed * drc;
+		} else {
+			Vector2 m0 = Cal (p0, p1, time);
+			Vector2 m1 = Cal (p1, p2, time);
+			Vector2 m2 = Cal (p2, p3, time);
+			
+			Vector2 b0 = Cal (m0, m1, time);
+			Vector2 b1 = Cal (m1, m2, time);
+			
+			b = Cal (b0, b1, time);
+		}
+
+		transform.position = b;
 	}
 	
 	Vector2 Cal(Vector2 v1, Vector2 v2, float t){
@@ -67,7 +85,7 @@ public class Bezier : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if(col.gameObject.tag == "Buyer" || col.gameObject.tag == "Bullet"){
+		if(col.gameObject.tag == "Buyer"){
 			return;
 		}
 		

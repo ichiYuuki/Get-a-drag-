@@ -11,12 +11,19 @@ public class Stopwatch : MonoBehaviour {
 	public static int MinCount;
 	public static int SecCount;
 	public GameObject player;
+	public GameObject boss;
+	public bool clear;
+
 	void Start () {
 		//シーンごとにタイムリセットに必要
 		DecCount = 0;
 		MinCount = 0;
 		SecCount = 0;
 		player = GameObject.Find ("UnityChan");
+		boss = GameObject.Find ("BossHone");
+		clear = false;
+
+		UnityEngine.Debug.Log(Application.loadedLevelName);
 	}
 
 	void Update () {
@@ -24,9 +31,16 @@ public class Stopwatch : MonoBehaviour {
 		Text Sec = GameObject.Find ("Sec").GetComponent<Text> ();
 		Text Decimal = GameObject.Find ("Decimal").GetComponent<Text> ();
 
+		if(Application.loadedLevelName == "MainStage2"){
+			if (boss == null){
+				clear = true;
+				UnityEngine.Debug.Log("スタート");
+			}
+		}
+
 		//ゲームクリアしてなければカウントアップ
 		if (player == true) {
-			if (ClearZone.gameClear == false) {
+			if (clear == false  && ClearZone.gameClear == false) {
 				timeCount += 1.0f * Time.deltaTime;
 				DecCount = timeCount * 100;
 			}
@@ -57,5 +71,5 @@ public class Stopwatch : MonoBehaviour {
 		}
 
 	}
-//	Debug.Log (Min.text);
+
 }

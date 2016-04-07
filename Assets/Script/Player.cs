@@ -35,6 +35,7 @@ public class Player : MonoBehaviour {
 	public Text gameOverText;
 	private bool gameOver = false;
 	public Canvas canvas;
+	public static bool ending;
 	//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour {
 		renderer = GetComponent<Renderer>();
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
+		ending = false;
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
 //		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
@@ -79,6 +81,8 @@ public class Player : MonoBehaviour {
 				chargeTime += Time.deltaTime;
 				if(chargeTime >= 2f && laserCount > 0 && !GameObject.Find("ChargeEffect(Clone)")){
 					Instantiate(chargeEffect,transform.position + new Vector3(0f,0.8f,0f),transform.rotation);
+					ending =true;
+					Debug.Log(ending);
 				}
 			}
 			

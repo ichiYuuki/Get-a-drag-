@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Button : MonoBehaviour {
 	private GameObject _Start;
 	private float _Step = 0.05f;
-	private bool check;
+	public static bool check;
 
 	private AudioSource[] seScorce;
 
@@ -33,7 +33,7 @@ public class Button : MonoBehaviour {
 	public void ButtonPushu(){
 		check = true;
 		Application.LoadLevel("MainTitle");
-		Debug.Log ("test");
+//		Debug.Log ("test");
 
 	}
 
@@ -45,8 +45,11 @@ public class Button : MonoBehaviour {
 		check = true;
 		StartCoroutine("change");
 	}
-	public void highScre(){
-		Debug.Log ("result");
+	public void SETest(){
+		if(!check){
+			int x = UnityEngine.Random.Range (0, seScorce.Length);
+			seScorce [x].Play ();
+		}
 	}
 
 //	public void RandSE(params AudioClip[] clips){
@@ -60,8 +63,8 @@ public class Button : MonoBehaviour {
 	}
 	IEnumerator change(){
 		yield return new WaitForSeconds(5);
-//		Application.LoadLevel("MainStage1");
-		Application.LoadLevel("BondStage");
+		Application.LoadLevel("MainStage1");
+//		Application.LoadLevel("BondStage");
 //		Application.LoadLevel("Description");
 	}
 }

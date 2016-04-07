@@ -31,14 +31,18 @@ public class ClearZone : MonoBehaviour {
 //	}
 
 	void CallStage(){
-		if(Application.loadedLevelName == "test_ichi"){
-			Application.LoadLevel ("test_ichi1");
+		if(Application.loadedLevelName == "MainStage1"){
+			Application.LoadLevel ("MainStage2");
 		}
 		if(Application.loadedLevelName == "test_ichi1"){
 			Application.LoadLevel ("Title");
 		}
-		if(Application.loadedLevelName == "BondStage"){
-			Application.LoadLevel ("Ending");
+		if (Application.loadedLevelName == "BondStage") {
+			if (Player.ending == true){
+				Application.LoadLevel ("BadEnding");
+			} else {
+				Application.LoadLevel ("Ending");
+			}
 		}
 	}
 }

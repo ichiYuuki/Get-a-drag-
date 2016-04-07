@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
-public class GameResult : Stopwatch {
-	private float highScre;
-	private float highScre00;
+public class GameResult : MonoBehaviour {
+	private float highScre01;
+	private float highScre02;
 	private float bondScre;
 	//	List<int> highScre = new List<int> ();
 	
@@ -14,19 +14,19 @@ public class GameResult : Stopwatch {
 	public GameObject parts;
 	
 	void Start () {
-		if(Application.loadedLevelName == "test_ichi"){
-			if (PlayerPrefs.HasKey ("HighScre_a")) {
-				highScre = PlayerPrefs.GetFloat ("HighScre_a");
+		if(Application.loadedLevelName == "MainStage1"){
+			if (PlayerPrefs.HasKey ("HighScre_01")) {
+				highScre01 = PlayerPrefs.GetFloat ("HighScre_01");
 			} else {
-				highScre = 5999;
+				highScre01 = 5999;
 			} 
 		}
 
-		if(Application.loadedLevelName == "test_ichi1"){
-			if (PlayerPrefs.HasKey ("HighScre_b")) {
-				highScre00 = PlayerPrefs.GetFloat ("HighScre_b");
+		if(Application.loadedLevelName == "MainStage2"){
+			if (PlayerPrefs.HasKey ("HighScre_02")) {
+				highScre02 = PlayerPrefs.GetFloat ("HighScre_01");
 			} else {
-				highScre00 = 5999;
+				highScre02 = 5999;
 			} 
 		}
 
@@ -38,6 +38,7 @@ public class GameResult : Stopwatch {
 			} 
 		}
 //		Debug.Log (highScre + " StarthighScre");
+
 	}
 	
 	
@@ -52,37 +53,37 @@ public class GameResult : Stopwatch {
 			String DecCounts = String.Format("{0:D2}",(int)DecCount);
 			clearTime.text = "ClearTime:  " + Min + ":" + Secs + "." + DecCounts;
 
-			if(Application.loadedLevelName == "test_ichi"){
-				bestTime.text = "BestTime:   " + keisan(highScre);//keisan(highs)
+			if(Application.loadedLevelName == "BondStage"){
+				bestTime.text = "BestTime:   " + keisan(bondScre);//keisan(highs)
 			}
-			if(Application.loadedLevelName == "test_ichi"){
-				if(highScre > result){
-					PlayerPrefs.SetFloat("HighScre_a",result);
+			if(Application.loadedLevelName == "BondStage"){
+				if(bondScre > result){
+					PlayerPrefs.SetFloat("BondStage",result);
 				}
 			}
 //			Debug.Log(Secs + "Secs");
 //			Debug.Log(clearTime.text);
 //			Debug.Log(highScre + "highScre");
 
-			if(Application.loadedLevelName == "test_ichi1"){
-				bestTime.text = "BestTime:   " + keisan(highScre00);
+			if(Application.loadedLevelName == "MainStage1"){
+				bestTime.text = "BestTime:   " + keisan(highScre01);
 			}
-			if(Application.loadedLevelName == "test_ichi1"){
-				if(highScre00 > result){
-					PlayerPrefs.SetFloat("HighScre_b", result);
+			if(Application.loadedLevelName == "MainStage1"){
+				if(highScre01 > result){
+					PlayerPrefs.SetFloat("HighScre_01", result);
 				}
 			}
 
-			if(Application.loadedLevelName == "BondStage"){
-				bestTime.text = "BestTime:   " + keisan(bondScre);//keisan(highs)
+			if(Application.loadedLevelName == "MainStage2"){
+				bestTime.text = "BestTime:   " + keisan(highScre02);//keisan(highs)
 			}
-			if(Application.loadedLevelName == "BondStage"){
-				if(bondScre > result){
-					PlayerPrefs.SetFloat("BondScre",result);
+			if(Application.loadedLevelName == "MainStage2"){
+				if(highScre02 > result){
+					PlayerPrefs.SetFloat("HighScre_02",result);
 				}
 			}
 		}
-//				PlayerPrefs.DeleteAll();//データ初期化
+				PlayerPrefs.DeleteAll();//データ初期化
 //				Debug.Log(Application.loadedLevelName);
 //				Debug.Log (PlayerPrefs.GetInt ("HighScre00"));
 	}
@@ -99,7 +100,10 @@ public class GameResult : Stopwatch {
 
 	}
 	
-	//	public void OnRetry(){
-	//		Application.LoadLevel ("ichikawa");
-	//	}
+	public void OnRetry(){
+		if(!Button.check){
+			PlayerPrefs.DeleteAll();
+			Debug.Log("データ初期化");
+		}
+	}
 }

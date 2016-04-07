@@ -16,7 +16,7 @@ public class LastText : MonoBehaviour {
 	void Update () {
 		if(canvas == null){
 			lastText.SetActive(true);
-			Invoke ("MainTitle", 4);
+			Invoke ("MainTitle", 5);
 //			Debug.Log("nullだよ");
 		}
 

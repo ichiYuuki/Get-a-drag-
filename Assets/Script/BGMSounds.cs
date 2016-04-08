@@ -6,19 +6,14 @@ public class BGMSounds : MonoBehaviour {
 
 	void Start () {
 		bgmScurce = gameObject.GetComponents<AudioSource>();
-		bgmScurce[0].Play();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		bgmScurce[0].Play();
-		if(Application.loadedLevelName == "MainStage1"){
-			Debug.Log("ステージ1" + Application.loadedLevelName);
-			bgmScurce[0].Play();
 
-		}
-		else if(Application.loadedLevelName == "MainStage2"){
-			bgmScurce[0].Stop();
+	void Update () {
+		if(Application.loadedLevelName == "MainStage1"){
+			Debug.Log("ステージ1" + bgmScurce[0].name);
+			bgmScurce[0].Play();
+		}else if(Application.loadedLevelName == "MainStage2"){
+//			bgmScurce[0].Stop();
 			if(BossStage.bossArea){
 				Debug.Log("ステージ2" + BossStage.bossArea);
 				bgmScurce[1].Stop();

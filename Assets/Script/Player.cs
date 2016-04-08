@@ -121,7 +121,6 @@ public class Player : MonoBehaviour {
 				Vector2 temp = transform.localScale;
 				temp.x = x;
 				transform.localScale = temp;
-
 				anim.SetBool ("Dash", true);
 			}
 //			if (transform.position.x > mainCamera.transform.position.x - 4) {
@@ -143,8 +142,8 @@ public class Player : MonoBehaviour {
 			}
 		} 
 		else {
-			anim.SetBool ("Dash", true);
-			rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
+			anim.SetBool ("Dash", false);
+//			rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
 		}
 	}
 	
@@ -159,7 +158,7 @@ public class Player : MonoBehaviour {
 				
 				Destroy (col.gameObject);
 				if (gameOver == false) {
-					//					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
+//					Instantiate (explosion, transform.position + new Vector3 (0, 1, 0), transform.rotation);
 				}
 				GameOver ();
 			}

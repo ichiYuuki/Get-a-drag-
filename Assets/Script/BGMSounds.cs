@@ -9,18 +9,19 @@ public class BGMSounds : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Application.loadedLevelName == "MainStage1"){
-			Debug.Log("ステージ1" + bgmScurce[0].name);
-			bgmScurce[0].Play();
-		}else if(Application.loadedLevelName == "MainStage2"){
+		bgmScurce[0].Play();
+//		if(Application.loadedLevelName == "MainStage1"){
+//			Debug.Log("ステージ1" + bgmScurce[0].name);
+//			bgmScurce[0].Play();
+//		}else if(Application.loadedLevelName == "MainStage2"){
 //			bgmScurce[0].Stop();
-			if(BossStage.bossArea){
-				Debug.Log("ステージ2" + BossStage.bossArea);
-				bgmScurce[1].Stop();
-			}else{
-				Debug.Log("ステージ2Boss");
-				bgmScurce[2].Play();
-			}
-		}
+//			if(BossStage.bossArea){
+//				Debug.Log("ステージ2" + BossStage.bossArea);
+//				bgmScurce[1].Stop();
+//			}else{
+//				Debug.Log("ステージ2Boss");
+//				bgmScurce[2].Play();
+//			}
+//		}
 	}
 }

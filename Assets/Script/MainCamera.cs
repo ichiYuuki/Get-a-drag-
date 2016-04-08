@@ -32,9 +32,11 @@ public class MainCamera : MonoBehaviour {
 	}
 
 	void Target(){
+		center = GetComponent<Camera> ().ScreenToWorldPoint (new Vector3 (Screen.width / 2, 0f, 0f)).x - GetComponent<Camera> ().ScreenToWorldPoint (Vector3.zero).x;
 		transform.position = new Vector3 (player.transform.position.x, 5,-10);
 		if (transform.position.x < startPoint.transform.position.x + center) {
-
+//			Debug.Log (center);
+//			Debug.Log(transform.position.x + "," + (startPoint.transform.position.x + center));
 			transform.position = new Vector3(startPoint.transform.position.x + center, 5, -10);
 		}
 		if (transform.position.x >= 100) {

@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour {
 	public int power = 0;
 	public float destroyTime = 5f;
     private GameObject player;
+    private GameObject Lives;
 
     void Start () {
 //		player = GameObject.FindWithTag ("Enemy");
@@ -26,7 +27,10 @@ public class EnemyBullet : MonoBehaviour {
 			//hp  -= power;
 			if(hp <= 0){
                 player = GameObject.Find("UnityChan");                
-                Destroy(player);               
+                Destroy(player);
+                Lives = GameObject.Find("Lives");
+                var zannki = Lives.GetComponent<RemainingLives>();
+                zannki.LifeCounterDown();
             }
             col.gameObject.GetComponent<Player>().hp = hp;			
 		}

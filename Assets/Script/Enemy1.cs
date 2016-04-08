@@ -25,7 +25,7 @@ public class Enemy1 : MonoBehaviour {
 
 	IEnumerator Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
-		player = GameObject.FindWithTag ("Buyer");
+//		player = GameObject.FindWithTag ("Buyer");
 
 		while(shotbool == false){
 
@@ -33,7 +33,8 @@ public class Enemy1 : MonoBehaviour {
 		}
 
 		while (canShot) {
-			if(canHoming){
+			player = GameObject.FindWithTag ("Buyer");
+			if(canHoming && player){
 				Vector3 ev = new Vector3(0f,0f,Homing(transform.position, player.transform.position));
 				Shot(ev);
 			}else{
@@ -51,7 +52,7 @@ public class Enemy1 : MonoBehaviour {
 			rigidbody2D.velocity = new Vector2 (speed, rigidbody2D.velocity.y);
 		}
 
-		if(gameObject.transform.position.y < Camera.main.transform.position.y -8 || gameObject.transform.position.x < Camera.main.transform.position.x -10){
+		if(gameObject.transform.position.y < Camera.main.transform.position.y -8 || gameObject.transform.position.x < Camera.main.ScreenToWorldPoint (Vector2.zero).x -1f){
 			Destroy(gameObject);
 		}
 

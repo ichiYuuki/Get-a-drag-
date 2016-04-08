@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
 	private Renderer renderer;
 	private bool gameClear = false;
 	//	public Text clearText;
+	private bool moveLim = false;
 	
 	public Text gameOverText;
 	private bool gameOver = false;
@@ -110,7 +111,11 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
 		if (!gameClear && !Stopwatch.clear) {
 			float x = Input.GetAxisRaw ("Horizontal");
-			MoveLimit();
+
+			if(moveLim){
+				MoveLimit();
+			}
+
 			if (x != 0) {
 				rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
 				Vector2 temp = transform.localScale;
@@ -173,6 +178,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void MoveLimit(){
+
 		// 画面左下のワールド座標をビューポートから取得
 		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 		
@@ -209,4 +215,7 @@ public class Player : MonoBehaviour {
 		canLaser = bo;
 	}
 
+	public void SetLim(bool bo){
+		moveLim = bo;
+	}
 }

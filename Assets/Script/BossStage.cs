@@ -17,6 +17,7 @@ public class BossStage : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c){
 		if(c.gameObject.tag == "Buyer"){
+			c.gameObject.GetComponent<Player>().SetLim(true);
 			Camera.GetComponent<MainCamera> ().BattleStart();
 			bossArea = true;
 		}

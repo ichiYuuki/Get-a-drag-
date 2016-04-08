@@ -11,22 +11,23 @@ public class MainCamera : MonoBehaviour {
 	public GameObject startPoint;
 	private float center;
 
-	private Transform playerTrans;
+//	private Transform playerTrans;
 	// Use this for initialization
 	void Start () {
-		playerTrans = player.GetComponent<Transform>();
+//		playerTrans = player.GetComponent<Transform>();
 		center = GetComponent<Camera> ().ScreenToWorldPoint (new Vector3 (Screen.width / 2, 0f, 0f)).x - GetComponent<Camera> ().ScreenToWorldPoint (Vector3.zero).x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (player) {
-			if(!bossBattleStart){
-				Target();
-			}else{
-				BossBattle();
+			if (!bossBattleStart) {
+				Target ();
+			} else {
+				BossBattle ();
 			}
-
+		} else if (GameObject.FindWithTag ("Buyer")) {
+			player = GameObject.FindWithTag ("Buyer");
 		}
 	}
 
@@ -39,7 +40,7 @@ public class MainCamera : MonoBehaviour {
 		if (transform.position.x >= 100) {
 			transform.position = new Vector3(100, 5, -10);
 		}
-		float playerHeight = playerTrans.position.y;
+		float playerHeight = player.transform.position.y;
 		float currentCameraHeight = transform.position.y;
 //		Debug.Log(playerHeight + "," + currentCameraHeight);
 		float newHeight = Mathf.Lerp (currentCameraHeight, playerHeight, 0.5f);

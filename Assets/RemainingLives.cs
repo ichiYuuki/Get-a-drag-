@@ -14,7 +14,7 @@ public class RemainingLives : MonoBehaviour
     {
          lives = GameObject.Find("Lives");
          life1 = GameObject.Find("life1");
-        life2 = GameObject.Find("life2");       
+         life2 = GameObject.Find("life2");
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class RemainingLives : MonoBehaviour
     {
         if (lifeCounter == 2)
         {                    
-            Destroy(life2);          
+            Destroy(life2);
         }
         else if (lifeCounter == 1)
         {
@@ -43,6 +43,7 @@ public class RemainingLives : MonoBehaviour
         else if (lifeCounter == 0)
         {
             Debug.Log("GameOver");
+            return;
         }
         Respawn();
     }

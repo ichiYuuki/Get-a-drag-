@@ -21,7 +21,7 @@ public class BossEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	IEnumerator Start () {
-		player = GameObject.FindWithTag ("Buyer");
+//		player = GameObject.FindWithTag ("Buyer");
 
 		pos = transform.position;
 
@@ -40,6 +40,7 @@ public class BossEnemy : MonoBehaviour {
 
 			yield return new WaitForSeconds(shotDelay);
 
+			player = GameObject.FindWithTag ("Buyer");
 			if(GameObject.FindWithTag("Buyer")){
 				for(int i = 0; i < homingShot.Length; i++){
 					homingShot[i].transform.eulerAngles = new Vector3(0,0,Homing(homingShot[i].transform.position, player.transform.position));

@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if (!gameClear && !Stopwatch.clear) {
+//		if (!gameClear && !Stopwatch.clear) {
 			float x = Input.GetAxisRaw ("Horizontal");
 
 			if(moveLim){
@@ -140,11 +140,11 @@ public class Player : MonoBehaviour {
 				rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 				anim.SetBool ("Dash", false);
 			}
-		} 
-		else {
-			anim.SetBool ("Dash", false);
+//		} 
+//		else {
+//			anim.SetBool ("Dash", false);
 //			rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
-		}
+//		}
 	}
 	
 	void OnCollisionEnter2D(Collision2D col){

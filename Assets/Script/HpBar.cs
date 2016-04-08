@@ -13,8 +13,7 @@ public class HpBar : MonoBehaviour
     void Start()
     {
         hpBar = GameObject.Find("HpBar").GetComponent<Slider>();
-        unity = GameObject.Find("UnityChan");
-        player = unity.GetComponent<Player>();
+        player = GameObject.Find("UnityChan").GetComponent<Player>();
         color = GameObject.Find("Fill").GetComponent<Image>().color;            
     }
 

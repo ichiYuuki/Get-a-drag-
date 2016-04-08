@@ -11,8 +11,7 @@ public class InvincibleTime : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        player = GameObject.Find("UnityChan");
-        re = player.GetComponent<Renderer>();
+        
     }
 
     // Update is called once per frame
@@ -41,7 +40,9 @@ public class InvincibleTime : MonoBehaviour
         }
     }
 
-    public IEnumerator Damage() {         
+    public IEnumerator Damage() {
+        player = GameObject.Find("UnityChan");
+        re = player.GetComponent<Renderer>();
         //レイヤーをPlayerDamageに変更
         player.layer = LayerMask.NameToLayer("PlayerDamage");
         //while文を10回ループ

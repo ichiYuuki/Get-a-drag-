@@ -15,13 +15,7 @@ public class RemainingLives : MonoBehaviour
          lives = GameObject.Find("Lives");
          life1 = GameObject.Find("life1");
          life2 = GameObject.Find("life2");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }   
 
     public void LifeCounterDown()
     {
@@ -52,7 +46,7 @@ public class RemainingLives : MonoBehaviour
     {    
         //復活させる        
         var Clone = Instantiate(player, new Vector3(0,5,0), Quaternion.identity);
-        Clone.name = player.name;
+        Clone.name = player.name;        
         Debug.Log("復活");        
     }
 }

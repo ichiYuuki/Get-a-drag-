@@ -46,7 +46,7 @@ public class GameResult : MonoBehaviour {
 	
 	
 	void Update () {
-		Debug.Log (ClearZone.gameClear);
+//		Debug.Log (ClearZone.gameClear);
 		if (ClearZone.gameClear == true || Stopwatch.clear == true) {
 			parts.SetActive(true);
 			float Min = Mathf.FloorToInt(Stopwatch.MinCount);

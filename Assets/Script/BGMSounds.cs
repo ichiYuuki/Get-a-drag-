@@ -2,29 +2,30 @@
 using System.Collections;
 
 public class BGMSounds : MonoBehaviour {
-	public AudioClip bgmClip1;
-	public AudioClip bgmClip2;
-	private AudioSource audioScurce1;
-	private AudioSource audioScurce2;
+	private AudioSource[] bgmScurce;
+
 	void Start () {
-		audioScurce1 = gameObject.GetComponent<AudioSource>();
-		audioScurce2 = gameObject.GetComponent<AudioSource>();
-
-
-		if(Application.loadedLevelName == "MainStage1"){
-//			Debug.Log("ステージ1");
-			audioScurce1.clip = bgmClip1; 
-			audioScurce1.Play();
-		}
-		if(Application.loadedLevelName == "MainStage2"){
-			audioScurce2.clip = bgmClip2; 
-			audioScurce2.Play();
-//			Debug.Log("ステージ2");
-		}
+		bgmScurce = gameObject.GetComponents<AudioSource>();
+		bgmScurce[0].Play();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		bgmScurce[0].Play();
+		if(Application.loadedLevelName == "MainStage1"){
+			Debug.Log("ステージ1" + Application.loadedLevelName);
+			bgmScurce[0].Play();
 
+		}
+		else if(Application.loadedLevelName == "MainStage2"){
+			bgmScurce[0].Stop();
+			if(BossStage.bossArea){
+				Debug.Log("ステージ2" + BossStage.bossArea);
+				bgmScurce[1].Stop();
+			}else{
+				Debug.Log("ステージ2Boss");
+				bgmScurce[2].Play();
+			}
+		}
 	}
 }

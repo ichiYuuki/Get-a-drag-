@@ -4,9 +4,10 @@ using System.Collections;
 public class BossStage : MonoBehaviour {
 	
 	public GameObject Camera;
+	public static bool bossArea;
 	// Use this for initialization
 	void Start () {
-	
+		bossArea = false;
 	}
 	
 	// Update is called once per frame
@@ -17,6 +18,7 @@ public class BossStage : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c){
 		if(c.gameObject.tag == "Buyer"){
 			Camera.GetComponent<MainCamera> ().BattleStart();
+			bossArea = true;
 		}
 
 	}

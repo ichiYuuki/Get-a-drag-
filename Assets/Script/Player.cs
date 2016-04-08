@@ -159,9 +159,9 @@ public class Player : MonoBehaviour {
 				GameOver ();
 			}
 			if (col.gameObject.tag == "DestroyArea") {
-
 //				GameOver ();
 			}
+
 		}
 	}
 	

@@ -22,8 +22,8 @@ public class Stopwatch : MonoBehaviour {
 		player = GameObject.Find ("UnityChan");
 		boss = GameObject.Find ("BossHone");
 		clear = false;
-		UnityEngine.Debug.Log(clear + "スタート");
-		UnityEngine.Debug.Log(Application.loadedLevelName);
+//		UnityEngine.Debug.Log(clear + "スタート");
+//		UnityEngine.Debug.Log(Application.loadedLevelName);
 	}
 
 	void Update () {

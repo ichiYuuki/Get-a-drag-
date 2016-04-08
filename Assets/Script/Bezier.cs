@@ -11,8 +11,8 @@ public class Bezier : MonoBehaviour {
 	GameObject enemy;
 	GameObject[] enemys;
 	
-	public int power = 2;
-	float speed = 3;
+//	public int power = 2;
+	public float speed = 3;
 	
 	float time = 0;
 
@@ -51,7 +51,7 @@ public class Bezier : MonoBehaviour {
 			}
 
 			p2 = p0 + p2;
-			p3 = enemy.transform.position;
+			p3 = enemy.transform.position + new Vector3(0,0.2f,0);
 		} else {
 //			p2 = p0 + new Vector2 (p2.x * player.transform.localScale.x, p2.y);
 //			p3 = p0 + new Vector2(10 * player.transform.localScale.x ,1);

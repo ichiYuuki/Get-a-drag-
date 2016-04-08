@@ -45,7 +45,7 @@ public class Bezier : MonoBehaviour {
 			}
 
 
-			if(enemy.transform.position.x > righttop.x || enemy.transform.position.y > righttop.y
+			if(!enemy || enemy.transform.position.x > righttop.x || enemy.transform.position.y > righttop.y
 			   || enemy.transform.position.x < leftbottom.x || enemy.transform.position.x < leftbottom.y ){
 				straight = true;
 			}

@@ -7,12 +7,13 @@ public class RemainingLives : MonoBehaviour
     private GameObject life1;
     private GameObject life2;
     private int lifeCounter = 3;
-    public GameObject RevivePoint;
+    public Vector3 RevivePoint;
     public GameObject player;
-    // Use this for initialization
+    public GameOver gameOver;
+    
     void Start()
     {
-         lives = GameObject.Find("Lives");
+         //lives = GameObject.Find("Lives");
          life1 = GameObject.Find("life1");
          life2 = GameObject.Find("life2");
     }   
@@ -20,7 +21,7 @@ public class RemainingLives : MonoBehaviour
     public void LifeCounterDown()
     {
         lifeCounter--;
-        Debug.Log(lifeCounter);
+        Debug.Log("残機は"+ lifeCounter);
         RespawnCheck();
     }
 
@@ -35,8 +36,8 @@ public class RemainingLives : MonoBehaviour
             Destroy(life1);          
         }
         else if (lifeCounter == 0)
-        {
-            Debug.Log("GameOver");
+        {           
+            gameOver.gameOver();
             return;
         }
         Respawn();
@@ -45,7 +46,7 @@ public class RemainingLives : MonoBehaviour
     public void Respawn()
     {    
         //復活させる        
-        var Clone = Instantiate(player, new Vector3(0,5,0), Quaternion.identity);
+        var Clone = Instantiate(player, RevivePoint, Quaternion.identity);
         Clone.name = player.name;        
         Debug.Log("復活");        
     }

@@ -25,13 +25,13 @@ public class EnemyBullet : MonoBehaviour {
 			Destroy(gameObject);
 			int hp = col.gameObject.GetComponent<Player>().hp;
 			//hp  -= power;
-			if(hp <= 0){
-                player = GameObject.Find("UnityChan");                
-                Destroy(player);
-                Lives = GameObject.Find("Lives");
-                var zannki = Lives.GetComponent<RemainingLives>();
-                zannki.LifeCounterDown();
-            }
+			//if(hp <= 0){
+   //             player = GameObject.Find("UnityChan");                
+   //             Destroy(player);
+   //             Lives = GameObject.Find("Lives");
+   //             var zannki = Lives.GetComponent<RemainingLives>();
+   //             zannki.LifeCounterDown();
+   //         }
             col.gameObject.GetComponent<Player>().hp = hp;			
 		}
 		if (col.gameObject.tag == "BreakBlock") {

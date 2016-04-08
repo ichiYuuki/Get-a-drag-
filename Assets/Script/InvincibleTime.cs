@@ -5,9 +5,11 @@ using System.Collections;
 public class InvincibleTime : MonoBehaviour
 {
     private GameObject player;
+    public GameObject explosion;
     private Renderer re;
     public Player classPlayer;
     public EnemyBullet enemyBullet;
+    public RemainingLives remaningLives;   
     // Use this for initialization
     void Start()
     {
@@ -26,7 +28,8 @@ public class InvincibleTime : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             classPlayer.hp -= 1;
-            StartCoroutine("Damage");
+            //StartCoroutine("Damage");
+            DethCheck();
         }
     }
 
@@ -36,6 +39,23 @@ public class InvincibleTime : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             classPlayer.hp -= enemyBullet.power;
+            //StartCoroutine("Damage");
+            DethCheck();
+        }
+    }
+
+    public void DethCheck()
+    {
+        if (classPlayer.hp <= 0)
+        {
+            player = GameObject.Find("UnityChan");
+            Destroy(player);
+            GameObject Lives = GameObject.Find("Lives");
+            var zannki = Lives.GetComponent<RemainingLives>();
+            zannki.LifeCounterDown();
+        }
+        else
+        {
             StartCoroutine("Damage");
         }
     }

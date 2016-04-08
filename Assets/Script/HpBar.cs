@@ -6,7 +6,6 @@ public class HpBar : MonoBehaviour
 {
     private Slider hpBar;
     private Player player;
-    private GameObject unity;
     private int hp;
     public GameObject Fill;
     private Color color;
@@ -19,17 +18,21 @@ public class HpBar : MonoBehaviour
 
     void Update()
     {
+        if (hp <= 0)
+        {                       
+            player = GameObject.Find("UnityChan").GetComponent<Player>();          
+        }
         hp = player.hp;
         hpBar.value = hp;
-        Debug.Log(hp);
         HpColor();
+        Debug.Log(hp);
     }
 
     //体力の値で色を変える
     private void HpColor()
     {       
         //hpが7～１０の時
-        if (hp >= 7 && hp < 10)
+        if (hp >= 7 && hp < 11)
         {
             //緑色
             color = Fill.GetComponent<Image>().color = new Color(0, 255, 0);

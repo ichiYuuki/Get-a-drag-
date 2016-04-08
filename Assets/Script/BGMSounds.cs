@@ -9,40 +9,41 @@ public class BGMSounds : MonoBehaviour {
 	public AudioClip bgmClip2;
 	public AudioClip bgmClip3;
 
-	private AudioSource audioScurce1;
-	private AudioSource audioScurce2;
-	private AudioSource audioScurce3;
+	private AudioSource audioScurce;
 
 	void Start () {
 //		bgmScurce = gameObject.GetComponents<AudioSource>();
-		audioScurce1 = gameObject.GetComponent<AudioSource>();
-		audioScurce2 = gameObject.GetComponent<AudioSource>();
-		audioScurce3 = gameObject.GetComponent<AudioSource>();
-
-		audioScurce1.clip = bgmClip1; 
-		audioScurce2.clip = bgmClip2; 
-		audioScurce3.clip = bgmClip3; 
-
+		audioScurce = gameObject.GetComponent<AudioSource>();
 		if(Application.loadedLevelName == "MainStage1"){
 			Debug.Log("ステージ1");
-			audioScurce1.Play();
-		}else if(Application.loadedLevelName == "MainStage2"){
-//			bgmScurce[0].Stop();
-			if(BossStage.bossArea){
-				Debug.Log("ステージ2" + BossStage.bossArea);
-//				bgmScurce[1].Stop();
-				audioScurce2.Play();
-			}else{
-				Debug.Log("ステージ2Boss");
-//				bgmScurce[2].Play();
-				audioScurce3.Play();
-			}
+			Debug.Log(audioScurce);
+			audioScurce.clip = bgmClip1; 
+			audioScurce.Play();
 		}
+		if(Application.loadedLevelName == "MainStage2"){
+			if (BossStage.bossArea) 
+			Debug.Log("ステージ2 スタート"+BossStage.bossArea);
+			Debug.Log(audioScurce);
+			audioScurce.clip = bgmClip2; 
+			audioScurce.Play();
+		}
+
 	}
 
 	void Update () {
+		if (Application.loadedLevelName == "MainStage2") {
+			if (BossStage.bossArea == true) {
+				Debug.Log ("ステージ2" + BossStage.bossArea);
+				//bgmScurce[1].Stop();
+				audioScurce.clip = bgmClip3; 
+				audioScurce.Play ();
 
-
+			} 
+//			else {
+//				audioScurce.clip = bgmClip3; 
+//				audioScurce.Play ();
+//			}
+		}
 
 	}
 }

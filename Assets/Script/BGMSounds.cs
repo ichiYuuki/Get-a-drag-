@@ -8,10 +8,11 @@ public class BGMSounds : MonoBehaviour {
 	public AudioClip bgmClip1;
 	public AudioClip bgmClip2;
 	public AudioClip bgmClip3;
-
+	public bool bgmone;
 	private AudioSource audioScurce;
 
 	void Start () {
+		bgmone = true;
 //		bgmScurce = gameObject.GetComponents<AudioSource>();
 		audioScurce = gameObject.GetComponent<AudioSource>();
 		if(Application.loadedLevelName == "MainStage1"){
@@ -21,29 +22,30 @@ public class BGMSounds : MonoBehaviour {
 			audioScurce.Play();
 		}
 		if(Application.loadedLevelName == "MainStage2"){
-			if (BossStage.bossArea) 
+			if (BossStage.bossArea == false){ 
 			Debug.Log("ステージ2 スタート"+BossStage.bossArea);
 			Debug.Log(audioScurce);
 			audioScurce.clip = bgmClip2; 
 			audioScurce.Play();
+			}
 		}
+	}
 
+	IEnumerator Bgm(){
+		audioScurce.clip = bgmClip3; 
+		audioScurce.Play ();
+		yield return null;
 	}
 
 	void Update () {
 		if (Application.loadedLevelName == "MainStage2") {
 			if (BossStage.bossArea == true) {
-				Debug.Log ("ステージ2" + BossStage.bossArea);
-				//bgmScurce[1].Stop();
-				audioScurce.clip = bgmClip3; 
-				audioScurce.Play ();
-
+				if(bgmone){
+					Debug.Log ("ステージ2" + BossStage.bossArea);
+					StartCoroutine("Bgm");
+					bgmone = false;
+				}
 			} 
-//			else {
-//				audioScurce.clip = bgmClip3; 
-//				audioScurce.Play ();
-//			}
 		}
-
 	}
 }

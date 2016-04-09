@@ -57,13 +57,17 @@ public class Player : MonoBehaviour {
 			transform.position - transform.up * 0.07f,
 			groundLayer);
 		
-		if (!gameClear && !Stopwatch.clear) {
+
 			if (Input.GetKeyDown ("space")) {
 				if (isGrounded) {
-					anim.SetBool ("Dash", false);
-					anim.SetTrigger ("Jump");
-					isGrounded = false;
-					rigidbody2D.AddForce (Vector2.up * jumpPower);
+					if(gameClear == true || Stopwatch.clear == true){
+						jumpPower = 0;
+					}else{
+						anim.SetBool ("Dash", false);
+						anim.SetTrigger ("Jump");
+						isGrounded = false;
+						rigidbody2D.AddForce (Vector2.up * jumpPower);
+					}
 				}
 			}
 			float velY = rigidbody2D.velocity.y;
@@ -71,8 +75,7 @@ public class Player : MonoBehaviour {
 			bool isFalling = velY < -0.1f ? true : false;
 			anim.SetBool ("isJumping", isJumping);
 			anim.SetBool ("isFalling", isFalling);
-			
-//			if(!gameClear){
+		if (!gameClear && !Stopwatch.clear) {
 			if (Input.GetKeyDown ("z") && canLaser) {
 				anim.SetTrigger ("Shot");
 				shot (bullet[bulletNum]);

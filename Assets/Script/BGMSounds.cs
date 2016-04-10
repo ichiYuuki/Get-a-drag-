@@ -13,20 +13,28 @@ public class BGMSounds : MonoBehaviour {
 
 	void Start () {
 		bgmone = true;
+		BossStage.bossArea = false;
+		Debug.Log(BossStage.bossArea + "ステージ2 スタート Boss");
+		Debug.Log (bgmone + "スタート");
+
 //		bgmScurce = gameObject.GetComponents<AudioSource>();
 		audioScurce = gameObject.GetComponent<AudioSource>();
 		if(Application.loadedLevelName == "MainStage1"){
-			Debug.Log("ステージ1");
-			Debug.Log(audioScurce);
+//			Debug.Log("ステージ1");
+//			Debug.Log(audioScurce);
 			audioScurce.clip = bgmClip1; 
 			audioScurce.Play();
 		}
 		if(Application.loadedLevelName == "MainStage2"){
+//			Debug.Log("ステージ2 スタート"+BossStage.bossArea);
 			if (BossStage.bossArea == false){ 
-			Debug.Log("ステージ2 スタート"+BossStage.bossArea);
-			Debug.Log(audioScurce);
-			audioScurce.clip = bgmClip2; 
-			audioScurce.Play();
+				if(bgmone = true){
+					Debug.Log("ステージ2 スタート BGM"+bgmone);
+					Debug.Log("ステージ2 スタート Boss"+BossStage.bossArea);
+//					Debug.Log(audioScurce);
+					audioScurce.clip = bgmClip2; 
+					audioScurce.Play();
+				}
 			}
 		}
 	}
@@ -38,9 +46,12 @@ public class BGMSounds : MonoBehaviour {
 	}
 
 	void Update () {
+
 		if (Application.loadedLevelName == "MainStage2") {
+			Debug.Log (bgmone + "アップデート");
 			if (BossStage.bossArea == true) {
 				if(bgmone){
+
 					Debug.Log ("ステージ2" + BossStage.bossArea);
 					StartCoroutine("Bgm");
 					bgmone = false;

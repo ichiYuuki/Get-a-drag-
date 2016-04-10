@@ -34,7 +34,7 @@ public class Stopwatch : MonoBehaviour {
 		if(Application.loadedLevelName == "MainStage2"){
 			if (boss == null){
 				clear = true;
-				UnityEngine.Debug.Log(clear);
+//				UnityEngine.Debug.Log(clear);
 			}
 		}
 

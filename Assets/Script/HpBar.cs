@@ -25,7 +25,7 @@ public class HpBar : MonoBehaviour
         hp = player.hp;
         hpBar.value = hp;
         HpColor();
-        Debug.Log(hp);
+//      Debug.Log(hp);
     }
 
     //体力の値で色を変える

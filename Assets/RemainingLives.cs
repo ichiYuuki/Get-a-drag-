@@ -30,12 +30,12 @@ public class RemainingLives : MonoBehaviour
         if (lifeCounter == 2)
         {                    
             Destroy(life2);
-            Respawn();
+            Invoke("Respawn", 1f);            
         }
         else if (lifeCounter == 1)
         {
             Destroy(life1);
-            Respawn();
+            Invoke("Respawn", 1f);
         }
         else if (lifeCounter == 0)
         {           

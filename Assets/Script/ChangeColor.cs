@@ -15,8 +15,10 @@ public class ChangeColor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		player = GameObject.FindWithTag ("Buyer").GetComponent<Player> ();
-		ChangeType (player.bulletNum);
+		if(GameObject.FindWithTag ("Buyer")){
+			player = GameObject.FindWithTag ("Buyer").GetComponent<Player> ();
+			ChangeType (player.bulletNum);
+		}
 	}
 
 	void ChangeType(int num){

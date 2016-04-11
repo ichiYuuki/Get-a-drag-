@@ -49,6 +49,7 @@ public class InvincibleTime : MonoBehaviour
         if (classPlayer.hp == 0)
         {
             player = GameObject.Find("UnityChan");
+            Instantiate(explosion, player.transform.position, player.transform.rotation);
             Destroy(player);
             GameObject Lives = GameObject.Find("Lives");
             var zannki = Lives.GetComponent<RemainingLives>();

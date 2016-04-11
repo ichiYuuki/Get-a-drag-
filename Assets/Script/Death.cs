@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class Death : MonoBehaviour
 {
-    public RemainingLives remainingLives;
-    private Explosion explosion;   
+    public RemainingLives remainingLives;    
     public GameObject player;
+    public GameObject explosion;
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class Death : MonoBehaviour
         if (col.tag == "Buyer" && col.tag != "Enemy")
         {
             player = GameObject.Find("UnityChan");
+            Instantiate(explosion, player.transform.position, player.transform.rotation);
             Destroy(player);
             remainingLives.LifeCounterDown();
        }

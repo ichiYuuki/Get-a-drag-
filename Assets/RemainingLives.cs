@@ -30,24 +30,27 @@ public class RemainingLives : MonoBehaviour
         if (lifeCounter == 2)
         {                    
             Destroy(life2);
+            Respawn();
         }
         else if (lifeCounter == 1)
         {
-            Destroy(life1);          
+            Destroy(life1);
+            Respawn();
         }
         else if (lifeCounter == 0)
         {           
             gameOver.gameOver();
             return;
         }
-        Respawn();
+        
     }
 
     public void Respawn()
-    {    
-        //復活させる        
+    {
+        //復活させる      
         var Clone = Instantiate(player, RevivePoint, Quaternion.identity);
-        Clone.name = player.name;        
+        //var Clone = Instantiate(Resources.Load("UnityChan"), RevivePoint, Quaternion.identity);        
+        Clone.name = player.name;
         Debug.Log("復活");        
     }
 }

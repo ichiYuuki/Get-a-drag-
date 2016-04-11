@@ -18,7 +18,7 @@ public class HpBar : MonoBehaviour
 
     void Update()
     {
-        if (hp <= 0)
+        if (hp <= 0 || player == null)
         {                       
             player = GameObject.Find("UnityChan").GetComponent<Player>();          
         }

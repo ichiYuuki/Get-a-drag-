@@ -262,4 +262,21 @@ public class Player : MonoBehaviour {
 			break;
 		}
 	}
+
+	public void Charge(){
+		chargeTime += Time.deltaTime;
+		if(laserCount > 0 && !GameObject.Find("ChargeEffect(Clone)")){
+			Instantiate(chargeEffect,transform.position + new Vector3(0f,0.8f,0f),transform.rotation);
+			ending =true;
+//			Debug.Log(ending);
+		}
+	}
+
+	public void ShotLaser(){
+		if(laserCount > 0){
+			shot (laser);
+			laserCount -= 1;
+		}
+		chargeTime = 0;
+	}
 }

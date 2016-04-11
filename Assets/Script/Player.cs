@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
 	
@@ -113,7 +114,20 @@ public class Player : MonoBehaviour {
 	
 	void FixedUpdate () {
 		if (!gameClear && !Stopwatch.clear) {
-			float x = Input.GetAxisRaw ("Horizontal");
+			float x = 0;
+			if(Input.GetAxisRaw ("Horizontal") != 0){
+				x = Input.GetAxisRaw ("Horizontal");
+			}
+			if(CrossPlatformInputManager.GetAxisRaw("Horizontal") != 0){
+				x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+			}
+			if(x >= 0.5f){
+				x = 1f;
+			}else if(x <= -0.5f){
+				x = -1f;
+			}else{
+				x = 0;
+			}
 
 			if(moveLim){
 				MoveLimit();
@@ -219,5 +233,33 @@ public class Player : MonoBehaviour {
 
 	public void SetLim(bool bo){
 		moveLim = bo;
+	}
+
+	public void OnClick(int i){
+		switch(i){
+		case 0:
+			anim.SetTrigger ("Shot");
+			shot (bullet[bulletNum]);
+			GetComponent<AudioSource>().Play();
+			break;
+		case 1:
+			if (isGrounded) {
+				if(gameClear == true || Stopwatch.clear == true){
+					jumpPower = 0;
+				}else{
+					anim.SetBool ("Dash", false);
+					anim.SetTrigger ("Jump");
+					isGrounded = false;
+					rigidbody2D.AddForce (Vector2.up * jumpPower);
+				}
+			}
+			break;
+		case 2:
+			bulletNum += 1;
+			if(bulletNum >= bullet.Length){
+				bulletNum = 0;
+			}
+			break;
+		}
 	}
 }

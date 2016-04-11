@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
 	private bool gameOver = false;
 	public Canvas canvas;
 	public static bool ending;
+
 	//	Text time = GameObject.Find ("Time").GetComponent<Text> ();
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -45,7 +46,6 @@ public class Player : MonoBehaviour {
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
 		ending = false;
-
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
 //		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();

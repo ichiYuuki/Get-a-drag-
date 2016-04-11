@@ -39,7 +39,7 @@ public class Stopwatch : MonoBehaviour {
 		}
 
 		//ゲームクリアしてなければカウントアップ
-		if (player == true) {
+		if (RemainingLives.lifeCounter >= 1) {
 			if (ClearZone.gameClear == false && clear == false) {
 				timeCount += 1.0f * Time.deltaTime;
 				DecCount = timeCount * 100;

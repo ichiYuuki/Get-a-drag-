@@ -6,7 +6,7 @@ public class RemainingLives : MonoBehaviour
     private GameObject lives;
     private GameObject life1;
     private GameObject life2;
-    private int lifeCounter = 3;
+    public static int lifeCounter = 3;
     public Vector3 RevivePoint;
     public GameObject player;
     public GameOver gameOver;

@@ -10,7 +10,7 @@ public class CallStage1 : MonoBehaviour {
 		if(Application.loadedLevelName == "Description"){
 			Application.LoadLevel ("Description2");
 		}
-		if(Application.loadedLevelName == "tDescription2"){
+		if(Application.loadedLevelName == "Description2"){
 			Application.LoadLevel ("MainStage1");
 		}
 	}

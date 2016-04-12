@@ -3,43 +3,26 @@ using System.Collections;
 
 public class VanishBlock : MonoBehaviour {
 	public bool block;
-//	public GameObject vblock;
 	public GameObject parts;
-
 	private float timeleft;
-
 	void Start () {
-//		vblock = GameObject.Find ("VBrock");
 		parts.SetActive(false);
+		block = false;
 	}
-
+	
 	void Update () {
-//		Invoke ("Leave", 5);
-//		Invoke ("Vanish", 10);
 		timeleft += Time.deltaTime;
 		if (timeleft >= 5.0) {
-			Debug.Log(timeleft + "出す");
-			Leave();
-//			Vanish();
+			if(block == false){
+				parts.SetActive(true);
+				block = true;
+			}
+			else if(block == true){
+				parts.SetActive(false);
+				block = false;
+			}
+			Debug.Log(block);
 			timeleft = 0.0f;
 		}
-		else if (timeleft >= 10.0) {
-			Debug.Log(timeleft + "消す");
-//				Leave();
-				Vanish();
-			timeleft = 0.0f;
-		}
-
-
-	}
-	public void SwitchActive(){
-		parts.SetActive(true);
-		parts.SetActive(false);
-	}
-	void Vanish(){
-		parts.SetActive(false);
-	}
-	void Leave(){
-		parts.SetActive(true);
 	}
 }

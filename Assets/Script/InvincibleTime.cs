@@ -46,7 +46,7 @@ public class InvincibleTime : MonoBehaviour
 
     public void DethCheck()
     {
-        if (classPlayer.hp == 0)
+        if (classPlayer.hp <= 0)
         {
             player = GameObject.Find("UnityChan");
             Instantiate(explosion, player.transform.position, player.transform.rotation);

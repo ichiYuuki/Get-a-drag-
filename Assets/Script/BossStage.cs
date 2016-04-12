@@ -21,6 +21,9 @@ public class BossStage : MonoBehaviour {
 			Camera.GetComponent<MainCamera> ().BattleStart();
 			bossArea = true;
 		}
+	}
 
+	public bool GetBool(){
+		return bossArea;
 	}
 }

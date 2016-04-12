@@ -64,6 +64,7 @@ public class Button : MonoBehaviour {
 	IEnumerator change(){
 		yield return new WaitForSeconds(5);
 		Application.LoadLevel("MainStage1");
+		Application.LoadLevel("Description");
 //		Application.LoadLevel("BondStage");
 //		Application.LoadLevel("Description");
 	}

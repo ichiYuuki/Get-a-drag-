@@ -19,13 +19,19 @@ public class HpBar : MonoBehaviour
     void Update()
     {
         if (hp <= 0 || player == null)
-        {                       
-            player = GameObject.Find("UnityChan").GetComponent<Player>();          
+        {
+            Invoke("PlayerFind",1f);
         }
         hp = player.hp;
         hpBar.value = hp;
         HpColor();
 //      Debug.Log(hp);
+    }
+
+    //新しく生成されたplayerを探す
+    public void PlayerFind()
+    {
+        player = GameObject.Find("UnityChan").GetComponent<Player>();
     }
 
     //体力の値で色を変える

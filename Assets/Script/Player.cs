@@ -47,6 +47,13 @@ public class Player : MonoBehaviour {
 		death = GetComponent<Death>();
 		energy = GetComponent<Energy>();
 		ending = false;
+		if(GameObject.Find("/Stage/BossStage/Floor")){
+			Debug.Log("bbb");
+			if(GameObject.Find("/Stage/BossStage/Floor").GetComponent<BossStage>().GetBool() == true){
+				moveLim = true;
+				Debug.Log("aaa");
+			}
+		}
 		//		Text time = GameObject.Find ("Time").GetComponent<Text> ();
 		//		GetComponent<Text> ().text = ((int)time).ToString();
 //		GameObject.Find("BulletType").GetComponent<Text>().text = "Bullet:Type" + (bulletNum+1).ToString();
